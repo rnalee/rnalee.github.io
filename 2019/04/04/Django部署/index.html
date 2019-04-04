@@ -1,0 +1,842 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Django,Python">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="摘要：基于阿里云ECS下的nginx和uwsgi部署Django（操作系统：Ubuntu16.04）">
+<meta name="keywords" content="Django,Python">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Django简介">
+<meta property="og:url" content="http://yoursite.com/2019/04/04/Django部署/index.html">
+<meta property="og:site_name" content="李先生">
+<meta property="og:description" content="摘要：基于阿里云ECS下的nginx和uwsgi部署Django（操作系统：Ubuntu16.04）">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://yoursite.com/2019/04/04/Django部署/1.1.jpg">
+<meta property="og:image" content="http://yoursite.com/2019/04/04/Django部署/1.2.jpg">
+<meta property="og:image" content="http://yoursite.com/2019/04/04/Django部署/1.3.jpg">
+<meta property="og:image" content="http://yoursite.com/2019/04/04/Django部署/2.1.jpg">
+<meta property="og:image" content="http://yoursite.com/2019/04/04/Django部署/5.1.jpg">
+<meta property="og:updated_time" content="2019-04-04T05:18:33.667Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Django简介">
+<meta name="twitter:description" content="摘要：基于阿里云ECS下的nginx和uwsgi部署Django（操作系统：Ubuntu16.04）">
+<meta name="twitter:image" content="http://yoursite.com/2019/04/04/Django部署/1.1.jpg">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":true,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2019/04/04/Django部署/">
+
+
+
+
+
+  <title>Django简介 | 李先生</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+ 
+  
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">李先生</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">rnalee</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首&emsp;&emsp;页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
+            
+            关于博主
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分&emsp;&emsp;类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归&emsp;&emsp;档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/04/04/Django部署/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="rnalee">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/uploads/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="李先生">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Django简介</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-04-04T11:44:54+08:00">
+                2019-04-04
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                  <span class="post-meta-divider">|</span>
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                   字
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                   分钟
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>摘要：基于阿里云ECS下的<strong>nginx</strong>和<strong>uwsgi</strong>部署Django（操作系统：Ubuntu16.04）</p>
+<a id="more"></a>
+<h3 id="一、配置云服务器ECS安全规则"><a href="#一、配置云服务器ECS安全规则" class="headerlink" title="一、配置云服务器ECS安全规则"></a>一、配置云服务器ECS安全规则</h3><p>​    进入ECS的控制台，找到<strong>‘实例   –&gt;  管理 –&gt; 安全组 –&gt; 配置规则 –&gt; 添加安全规则‘ </strong>，添加80，23，8000，3306端口，并设置其端口优先级为100。如下图</p>
+<p>​    <img src="/2019/04/04/Django部署/1.1.jpg" alt></p>
+<p><img src="/2019/04/04/Django部署/1.2.jpg" alt></p>
+<p><img src="/2019/04/04/Django部署/1.3.jpg" alt></p>
+<h3 id="二、安装nginx"><a href="#二、安装nginx" class="headerlink" title="二、安装nginx"></a>二、安装nginx</h3><p>​    1、作用：nginx作为服务器的最前端，负责接收浏览器的所有请求并统一管理，静态请求由nginx自己处理。</p>
+<p>​    2、安装：</p>
+<p>​          <code>sudo apt-get update</code></p>
+<p>​          <code>sudo apt-get install nginx</code></p>
+<p>​    安装完成后，查看nginx是否启动，sudo  service nginx  status，若没有启动，则输入sudo service nginx start启动，之后用自己电脑的浏览器访问ECS的公网ip地址，如出现以下页面，则安装成功！</p>
+<p><img src="/2019/04/04/Django部署/2.1.jpg" alt></p>
+<h3 id="三、安装uwsgi"><a href="#三、安装uwsgi" class="headerlink" title="三、安装uwsgi"></a>三、安装uwsgi</h3><p>​    1、作用：浏览器的非静态请求则通过uwsgi服务器传递给Django应用，由Django进行处理并做出响应</p>
+<p>​    2、安装：</p>
+<p>​     在本地电脑访问<a href="https://uwsgi-docs.readthedocs.io/en/latest/Download.html" target="_blank" rel="noopener">https://uwsgi-docs.readthedocs.io/en/latest/Download.html</a>，下载Stable/LTS版本的源文件，文件后缀为<strong><a href="https://projects.unbit.it/downloads/uwsgi-2.0.18.tar.gz" target="_blank" rel="noopener">.tar.gz</a></strong></p>
+<pre><code>其次再将下载到本地电脑的文件上传至服务器的用户目录下（如/home/django），输入 tar zxvf
+</code></pre><p>uwsgi-2.0.18.tar.gz -C  ~ 解压该文件，再cd到解压出来的文件目录下，输入以下命令：</p>
+<p>​    <code>sudo apt-get install python3-setuptools</code></p>
+<p>​    <code>sudo apt-get install python3-dev</code></p>
+<p>​    <code>sudo python3 setup.py install</code></p>
+<h3 id="四、配置项目"><a href="#四、配置项目" class="headerlink" title="四、配置项目"></a>四、配置项目</h3><p>​    1、先将本地电脑的项目整个上传至服务器的用户目录下（如/home/django）</p>
+<p>​    2、配置nginx</p>
+<p><code>cd /etc/nginx/sites-available</code></p>
+<p><code>sudo vim default</code></p>
+<p>若sites-available文件夹下没有default，则需要自己创建，并将以下代码添加至default中</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br></pre></td><td class="code"><pre><span class="line">server &#123;</span><br><span class="line">        listen 80 default_server;</span><br><span class="line">        listen [::]:80 default_server;</span><br><span class="line"></span><br><span class="line">        # SSL configuration</span><br><span class="line">        #</span><br><span class="line">        # listen 443 ssl default_server;</span><br><span class="line">        # listen [::]:443 ssl default_server;</span><br><span class="line">        #</span><br><span class="line">        # Note: You should disable gzip for SSL traffic.</span><br><span class="line">        # See: https://bugs.debian.org/773332</span><br><span class="line">        #</span><br><span class="line">        # Read up on ssl_ciphers to ensure a secure configuration.</span><br><span class="line">        # See: https://bugs.debian.org/765782</span><br><span class="line">        #</span><br><span class="line">        # Self signed certs generated by the ssl-cert package</span><br><span class="line">        # Don&apos;t use them in a production server!</span><br><span class="line">        #</span><br><span class="line">        # include snippets/snakeoil.conf;</span><br><span class="line"></span><br><span class="line">        root /var/www/html;</span><br><span class="line"></span><br><span class="line">        # Add index.php to the list if you are using PHP</span><br><span class="line">        index index.html index.htm index.nginx-debian.html;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">        server_name 47.102.156.25;</span><br><span class="line"></span><br><span class="line">        location / &#123;</span><br><span class="line">                # First attempt to serve request as file, then</span><br><span class="line">                # as directory, then fall back to displaying a 404.</span><br><span class="line">                # try_files $uri $uri/ =404;</span><br><span class="line">                include  uwsgi_params;</span><br><span class="line">                uwsgi_pass  127.0.0.1:8000;</span><br><span class="line">        &#125;</span><br><span class="line">          #Django项目的静态文件</span><br><span class="line">        location /static &#123;</span><br><span class="line">               root  /home/django/example;</span><br><span class="line">               break;</span><br><span class="line">      &#125;        </span><br><span class="line">        #Django项目的媒体文件</span><br><span class="line">        location /media &#123;</span><br><span class="line">                root /home/django/example;</span><br><span class="line">                break;</span><br><span class="line">        &#125;       </span><br><span class="line">        </span><br><span class="line">        # pass the PHP scripts to FastCGI server listening on 128.0.0.1:9000</span><br><span class="line">        #</span><br><span class="line">        #location ~ \.php$ &#123;</span><br><span class="line">        #       include snippets/fastcgi-php.conf;</span><br><span class="line">        #</span><br><span class="line">        #       # With php7.0-cgi alone:</span><br><span class="line">        #       fastcgi_pass 127.0.0.1:9000;</span><br><span class="line">        #       # With php7.0-fpm:</span><br><span class="line">        #       fastcgi_pass unix:/run/php/php7.0-fpm.sock;</span><br><span class="line">        #&#125;</span><br><span class="line"></span><br><span class="line">        # deny access to .htaccess files, if Apache&apos;s document root</span><br><span class="line">        # concurs with nginx&apos;s one</span><br><span class="line">        #</span><br><span class="line">        #location ~ /\.ht &#123;</span><br><span class="line">        #       deny all;</span><br><span class="line">        #&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>其中server_name <em>47.102.156.25</em>的ip换成自己公网的ip；</p>
+<p>static 静态文件（如css/js/img），也要换成自己服务器上Django项目的static路径；</p>
+<p>media 媒体文件（如mp3/mp4），也要换成自己服务器上Django项目的media路径；</p>
+<p><strong>注意：location、root 后面是有空格的</strong></p>
+<p>最后重启nginx </p>
+<p><code>sudo service nginx restart</code></p>
+<p>​    3、配置uwsgi</p>
+<p>在服务器项目的根目录下，既与manage.py同级目录，新建一个uwsgi.ini文件和一个run.log文件</p>
+<p>然后，编辑uwgin.ini文件，添加以下代码：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">[uwsgi]</span><br><span class="line">chdir = /home/django/example</span><br><span class="line">module = example.wsgi:application</span><br><span class="line">socket = 127.0.0.1:8000</span><br><span class="line">master = true</span><br><span class="line">daemonize = /home/django/example/run.log</span><br><span class="line">disable-logging = true</span><br><span class="line">wsgi-file = /home/django/example/example/wsgi.py</span><br><span class="line">pidfile=/home/django/example/uwsgi.pid</span><br></pre></td></tr></table></figure>
+<p>chdir 是服务器上项目的路径，请根据实际情况修改；</p>
+<p>moudule 是入口wsgi模块，将example替换成你自己的项目名称即可；</p>
+<p>socket 是通信端口设置，无需修改；</p>
+<p>master = true 表示以主进程模式运行，无需修改；</p>
+<p>daemonize 是服务器上项目的日志文件路径，请根据实际情况修改；</p>
+<p>disable-logging = true 表示不记录正常信息，只记录错误信息，否则你的日志可能很快就爆满了！</p>
+<p>最后，在有uwsgi.ini文件的目录下启动uwsgin</p>
+<p><code>uwsgi --ini uwsgi.ini</code></p>
+<p>​    4、修改项目的配置文件settings.py</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">DEBUG = False</span><br><span class="line">ALLOWED_HOSTS = [&apos;*&apos;]</span><br></pre></td></tr></table></figure>
+<p>在本地电脑浏览器上输入ECS的公网ip地址即可访问！</p>
+<p>若出现项目的样式丢失问题。则在项目的配置文件settings.py下增加以下配置</p>
+<p><code>STATIC_ROOT = &#39;/home/django/example/static&#39;</code></p>
+<p><strong>注意：STATIC_ROOT的路径应跟nginx配置的静态文件为同一个路径</strong></p>
+<p>最后，在项目manage.py同级目录下运行 <code>python manage.py collectstatic</code>重新收集静态文件交由nginx代理。</p>
+<h3 id="五、数据库问题（Mysql）"><a href="#五、数据库问题（Mysql）" class="headerlink" title="五、数据库问题（Mysql）"></a>五、数据库问题（Mysql）</h3><p><strong>若使用djano自带的数据库sqlite3，则可跳过此步</strong></p>
+<p>​    1、服务器上安装mysql</p>
+<p><code>sudo apt-get install mysql-server mysql-client</code></p>
+<p>输入以上命令后，会出现让你输入数据库密码的界面，此密码就是设置数据的密码，一定要记住！</p>
+<p>​    2、安装完成后，进入mysql创建数据库</p>
+<p><code>mysql -u root -p</code></p>
+<p><code>create database example；</code></p>
+<p>​    3、项目配置mysql数据库</p>
+<p>跟settings.py 同级的init.py文件使用vim编辑器打开init.py文件输入一下代码：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">import pymysql</span><br><span class="line">pymysql.install_as_MySQLdb()</span><br></pre></td></tr></table></figure>
+<p>​     修改settings.py配置</p>
+<p><img src="/2019/04/04/Django部署/5.1.jpg" alt></p>
+<p>​    4、开启ECS的3306端口，具体可参照<strong>配置云服务器ECS安全规则</strong>的步骤</p>
+<h3 id="六、项目绑定域名"><a href="#六、项目绑定域名" class="headerlink" title="六、项目绑定域名"></a>六、项目绑定域名</h3><p>​    1、配置https:</p>
+<p>​        创建 /opt/cert文件夹</p>
+<p>​        <code>mkdir  /opt/cert</code></p>
+<p>​        把域名的ssl证书上传到这个文件夹</p>
+<p>​    2、在/etc/nginx/conf.d下增加一个文件default.conf</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">server &#123;</span><br><span class="line"> listen 443;</span><br><span class="line"> server_name localhost;</span><br><span class="line"> ssl on;</span><br><span class="line"> root html;</span><br><span class="line"> index index.html index.htm;</span><br><span class="line"> ssl_certificate   /opt/cert/2017836_rio.xxxx.net.pem;</span><br><span class="line"> ssl_certificate_key  /opt/cert/2017836_rio.xxx.net.key;</span><br><span class="line"> ssl_session_timeout 5m;</span><br><span class="line"> ssl_ciphers ECDHE-RSA-AES128-GCM-SHA256:ECDHE:ECDH:AES:HIGH:!NULL:!aNULL:!MD5:!ADH:!RC4;</span><br><span class="line"> ssl_protocols TLSv1 TLSv1.1 TLSv1.2;</span><br><span class="line"> ssl_prefer_server_ciphers on;</span><br><span class="line"> location / &#123;</span><br><span class="line">     include  uwsgi_params;</span><br><span class="line">                uwsgi_pass  127.0.0.1:8000;</span><br><span class="line">        &#125;</span><br><span class="line">  #Django项目的静态文件</span><br><span class="line"> location /static &#123;</span><br><span class="line">               root  /home/django/example;</span><br><span class="line">               break;</span><br><span class="line">      &#125;</span><br><span class="line">   #Django项目的媒体文件</span><br><span class="line">   location /media &#123;</span><br><span class="line">                root /home/django/example;</span><br><span class="line">                break;</span><br><span class="line">        &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p> <strong>注意将ssl_certificate和 ssl_certificate_key改为自己的ssl证书，静态文件和媒体文件改成自己项目的路径</strong></p>
+<p>​    3、重启nginx</p>
+<p>​    4、在浏览器中访问用绑定的域名访问，能正常访问则正常。</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/04/04/Django简介/" rel="next" title="Django简介">
+                <i class="fa fa-chevron-left"></i> Django简介
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/uploads/avatar.jpg" alt="rnalee">
+            
+              <p class="site-author-name" itemprop="name">rnalee</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">2</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/rnalee" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:1695219395@qq.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#一、配置云服务器ECS安全规则"><span class="nav-number">1.</span> <span class="nav-text">一、配置云服务器ECS安全规则</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#二、安装nginx"><span class="nav-number">2.</span> <span class="nav-text">二、安装nginx</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#三、安装uwsgi"><span class="nav-number">3.</span> <span class="nav-text">三、安装uwsgi</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#四、配置项目"><span class="nav-number">4.</span> <span class="nav-text">四、配置项目</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#五、数据库问题（Mysql）"><span class="nav-number">5.</span> <span class="nav-text">五、数据库问题（Mysql）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#六、项目绑定域名"><span class="nav-number">6.</span> <span class="nav-text">六、项目绑定域名</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">rnalee</span>
+
+  
+</div>
+
+
+  <!--<div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a> v5.1.4</div>-->
+
+
+
+
+
+
+
+<span id="busuanzi_container_site_uv">
+  访客数:<span id="busuanzi_value_site_uv"></span>人次
+</span>
+
+
+  <!--<div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>-->
+
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+
+
+
+<span id="busuanzi_container_site_pv">
+   总访问量:<span id="busuanzi_value_site_pv"></span>次
+</span>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+<div class="theme-info">
+  <div class="powered-by"></div>
+  <span class="post-count">博客全站共字</span>
+</div>
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+          <span id="scrollpercent"><span>0</span>%</span>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
