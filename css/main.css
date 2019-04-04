@@ -1930,7 +1930,7 @@ img:hover {
   width: 4px;
   height: 4px;
   border-radius: 50%;
-  background: #e54eb8;
+  background: #181caa;
 }
 .links-of-blogroll {
   font-size: 13px;
@@ -3097,4 +3097,22 @@ img:hover {
   .post-body {
     text-align: justify;
   }
+}
+.out-img-topic {
+  display: block;
+  max-height: 350px;
+  margin-bottom: 24px;
+  overflow: hidden;
+}
+img.img-topic {
+  display: block;
+  margin-left: 0.7em;
+  margin-right: 0.7em;
+  padding: 0;
+  float: right;
+  clear: right;
+}
+.posts-expand .post-body img {
+  border: none;
+  padding: 0px;
 }
