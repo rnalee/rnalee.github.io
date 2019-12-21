@@ -2,6 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://yoursite.com/SparkSQL.html</loc>
+    
+    <lastmod>2019-12-21T04:33:40.702Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>http://yoursite.com/%E7%B3%AF%E7%B1%B3%E7%A5%A8%E6%88%BF.html</loc>
     
     <lastmod>2019-12-21T04:30:44.271Z</lastmod>
@@ -75,13 +82,6 @@
     <loc>http://yoursite.com/tags/index.html</loc>
     
     <lastmod>2019-12-19T12:59:07.722Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://yoursite.com/SparkSQL.html</loc>
-    
-    <lastmod>2019-12-18T08:43:30.718Z</lastmod>
     
   </url>
   
