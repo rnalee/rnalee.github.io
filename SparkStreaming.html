@@ -1,0 +1,978 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon.ico?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="python，spark">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="摘要：SparkStreaming是一个高吞吐、高容错的实时流处理系统，其核心为DStream..">
+<meta name="keywords" content="python，spark">
+<meta property="og:type" content="article">
+<meta property="og:title" content="SparkStreaming">
+<meta property="og:url" content="http://yoursite.com/SparkStreaming.html">
+<meta property="og:site_name" content="李先生">
+<meta property="og:description" content="摘要：SparkStreaming是一个高吞吐、高容错的实时流处理系统，其核心为DStream..">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://yoursite.com/SparkStreaming.htm/1.jpg">
+<meta property="og:image" content="http://yoursite.com/SparkStreaming.htm/2.jpg">
+<meta property="og:image" content="http://yoursite.com/SparkStreaming.htm/3.jpg">
+<meta property="og:image" content="http://yoursite.com/SparkStreaming.htm/4.jpg">
+<meta property="og:image" content="http://yoursite.com/SparkStreaming.htm/5.jpg">
+<meta property="og:image" content="http://yoursite.com/SparkStreaming.htm/6.jpg">
+<meta property="og:image" content="http://yoursite.com/SparkStreaming.htm/7.jpg">
+<meta property="og:image" content="http://yoursite.com/SparkStreaming.htm/8.jpg">
+<meta property="og:image" content="http://yoursite.com/SparkStreaming.htm/9.jpg">
+<meta property="og:image" content="http://yoursite.com/SparkStreaming.htm/10.jpg">
+<meta property="og:image" content="http://yoursite.com/SparkStreaming.htm/11.jpg">
+<meta property="og:image" content="http://yoursite.com/SparkStreaming.htm/12.jpg">
+<meta property="og:image" content="http://yoursite.com/SparkStreaming.htm/13.jpg">
+<meta property="og:updated_time" content="2019-12-21T02:02:43.681Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="SparkStreaming">
+<meta name="twitter:description" content="摘要：SparkStreaming是一个高吞吐、高容错的实时流处理系统，其核心为DStream..">
+<meta name="twitter:image" content="http://yoursite.com/SparkStreaming.htm/1.jpg">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":true,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/SparkStreaming.html">
+
+
+
+
+
+
+  <script>
+  (function(i,s,o,g,r,a,m){i["DaoVoiceObject"]=r;i[r]=i[r]||function(){(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;a.charset="utf-8";m.parentNode.insertBefore(a,m)})(window,document,"script",('https:' == document.location.protocol ? 'https:' : 'http:') + "//widget.daovoice.io/widget/0f81ff2f.js","daovoice")
+  daovoice('init', {
+      app_id: "ee7581bd"
+    });
+  daovoice('update');
+  </script>
+
+  <title>SparkStreaming | 李先生</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+ 
+  
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">李先生</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">rnalee</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首&emsp;&emsp;页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
+            
+            关于博主
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标&emsp;&emsp;签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分&emsp;&emsp;类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归&emsp;&emsp;档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/SparkStreaming.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="rnalee">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/uploads/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="李先生">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">SparkStreaming</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-12-21T08:44:38+08:00">
+                2019-12-21
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/spark/" itemprop="url" rel="index">
+                    <span itemprop="name">spark</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                  <span class="post-meta-divider">|</span>
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  1.8k 字
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  7 分钟
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>摘要：SparkStreaming是一个高吞吐、高容错的实时流处理系统，其核心为DStream..</p>
+<a id="more"></a>
+<h4 id="一、Spark-Streaming-概念"><a href="#一、Spark-Streaming-概念" class="headerlink" title="一、Spark Streaming 概念"></a>一、Spark Streaming 概念</h4><p>​    SparkStreaming是一个高吞吐、高容错的实时流处理系统，其核心为DStream（Discretized stream），且基于SparkCore，基于RDD的检查点（Checkpoint）实现容错机制。处理模式为Batch（微批处理），既输入流被切分成微批量数据，分开处理。</p>
+<p><img src="/SparkStreaming.htm/1.jpg" alt></p>
+<p>​    特点：（1）、吞吐量高/性能高；（2）、延迟在秒级</p>
+<h4 id="二、DStream"><a href="#二、DStream" class="headerlink" title="二、DStream"></a>二、DStream</h4><p>1、概念</p>
+<p>​    DStream，离散数据流，是Spark Streaming对流式数据的基本抽象，代表了连续的流式数据。DStream中，每个RDD都包含一定时间间隔内的数据。</p>
+<p>2、创建方式</p>
+<p>​    （1）、从数据流上直接创建</p>
+<p>​    （2）、从已有的DStream变换创建    </p>
+<p><img src="/SparkStreaming.htm/2.jpg" alt></p>
+<p>3、转换算子</p>
+<table>
+<thead>
+<tr>
+<th><strong>Transformation</strong></th>
+<th><strong>Meaning</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>map(func)</td>
+<td>对源DStream的每个元素，采用func函数进行转换，得到一个新的DStream</td>
+</tr>
+<tr>
+<td>flatMap(func)</td>
+<td>与map相似，但是每个输入项可用被映射为0个或者多个输出项</td>
+</tr>
+<tr>
+<td>filter(func)</td>
+<td>返回一个新的DStream，仅包含源DStream中满足函数func的项</td>
+</tr>
+<tr>
+<td>repartition</td>
+<td>通过创建更多或更少的分区改变这个DStream的并行级别</td>
+</tr>
+<tr>
+<td>union(otherStream)</td>
+<td>返回一个新的DStream，包含源DStream和其他DStream的元素</td>
+</tr>
+<tr>
+<td>count()</td>
+<td>统计源DStream中每个RDD的元素数量</td>
+</tr>
+<tr>
+<td>reduce(func)</td>
+<td>利用函数func聚集源DStream中每个RDD的元素，返回一个包含单元素RDDs的新DStream</td>
+</tr>
+<tr>
+<td>countByValue()</td>
+<td>应用于元素类型为K的DStream上，返回一个（K，V）键值对类型的新DStream，每个键的值是在原DStream的每个RDD中的出现次数</td>
+</tr>
+<tr>
+<td>reduceByKey(func,[numTasks])</td>
+<td>当在一个由(K,V)键值对组成的DStream上执行该操作时，返回一个新的由(K,V)键值对组成的DStream，每一个key的值均由给定的recuce函数（func）聚集起来</td>
+</tr>
+<tr>
+<td>join(otherStream,[numTasks])</td>
+<td>当应用于两个DStream（一个包含（K,V）键值对,一个包含(K,W)键值对），返回一个包含(K,(V, W))键值对的新DStream</td>
+</tr>
+<tr>
+<td>cogroup(otherStream,[numTasks])</td>
+<td>当应用于两个DStream（一个包含（K,V）键值对,一个包含(K,W)键值对），返回一个包含(K,Seq[V], Seq[W])的元组的DStream</td>
+</tr>
+<tr>
+<td><strong>transform(func)</strong></td>
+<td><strong>通过对源DStream的每个RDD应用RDD-to-RDD函数，创建一个新的DStream。支持在新的DStream中做任何RDD操作。</strong></td>
+</tr>
+<tr>
+<td><strong>updateStateByKey</strong></td>
+<td><strong>返回一个新状态(state)的DStream，每个Key的状态由给定的func函数根据先前状态的Key和Key的新值计算而来。</strong></td>
+</tr>
+</tbody>
+</table>
+<p>4、输出算子</p>
+<table>
+<thead>
+<tr>
+<th><strong>输出操作</strong></th>
+<th><strong>含义</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>print()</td>
+<td><strong>在Driver节点上输出DStream中每个批次的前10个元素。</strong><br>对于开发和调试非常有用。<strong>Python API要调用pprint()。</strong></td>
+</tr>
+<tr>
+<td>saveAsObjectFiles(prefix,[suffix])</td>
+<td><strong>将DStream中的内容以JAVA序列化对象的序列化文件进行存储。</strong>每个批次时间间隔的文件名字基于prefix和suffix生成：”prefix-TIME_IN_MS[.suffix]”。Python API不支持。</td>
+</tr>
+<tr>
+<td>saveAsTextFiles(prefix, [suffix])</td>
+<td><strong>将DStream的内容存储为文本文件。</strong>每个批次时间间隔的文件名字基于prefix和suffix生成：”prefix-TIME_IN_MS[.suffix]”</td>
+</tr>
+<tr>
+<td>saveAsHadoopFiles(prefix, [suffix])</td>
+<td><strong>将DStream的内容存储为Hadoop文件。</strong>每个批次时间间隔的文件名字基于prefix和suffix生成：”prefix-TIME_IN_MS[.suffix]”。Python API不支持。</td>
+</tr>
+<tr>
+<td>foreachRDD(func)</td>
+<td><strong>最通用的输出操作符，在DStream生成的每个RDD上应用函数func</strong>。这个函数通常将每个RDD的数据发送到外部系统，如保存RDD到文件或者通过网络写入到数据库。注意，函数func在运行Driver中，并且函数中通常要包含Action操作，推动RDD的运算。</td>
+</tr>
+</tbody>
+</table>
+<h4 id="三、Spark-Streaming-开发"><a href="#三、Spark-Streaming-开发" class="headerlink" title="三、Spark Streaming 开发"></a>三、Spark Streaming 开发</h4><p><strong>1、基于netcat的聊天室</strong></p>
+<p><img src="/SparkStreaming.htm/3.jpg" alt></p>
+<p>（1）在Linux下，启动NetCat服务端，并在1234端口监听<br><code>$ nc -lk 1234</code><br>（2）在Linux下，启动NetCat客户端，并连接Netcat服务端<br><code>$ nc localhost 1234</code><br>（3）在服务端输入字符串，并按回车，可以在客户端收到消息，并打印出来。</p>
+<p><img src="/SparkStreaming.htm/4.jpg" alt></p>
+<p>（4）在客户端输入字符串，并按回车，可以在服务端收到消息，并打印出来。</p>
+<p><img src="/SparkStreaming.htm/5.jpg" alt></p>
+<p><strong>2、运行网络版的WordCount</strong></p>
+<p><img src="/SparkStreaming.htm/6.jpg" alt></p>
+<p>（1）保持服务端在监听</p>
+<p>（2）客户端和服务端建立连接,并统计单词数量</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ cd ~/spark</span><br><span class="line"></span><br><span class="line">$ bin/run-example streaming.NetworkWordCount localhost 1234</span><br></pre></td></tr></table></figure>
+<p>（3）在服务端输入字符串，并按回车，观察Streaming WordCount的输出。</p>
+<p><img src="/SparkStreaming.htm/7.jpg" alt></p>
+<p><strong><u>注意事项：</u></strong></p>
+<p>​    （a）、如果执行本案例，必须确保机器CPU核数&gt;=2(接收器+处理接收的数据,接收器如果是多个，要大于接收器的数量，Local线程数大于接收器数量)</p>
+<p><img src="/SparkStreaming.htm/8.jpg" alt></p>
+<p>​    （b）、修改conf/log4j.properties            </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">log4j.rootCategory=WARN, console</span><br></pre></td></tr></table></figure>
+<p>​    （c）、要启动spark standalone</p>
+<p><strong>3、开发自己的StreamingWordCount，且支持统计历史数据</strong></p>
+<p>（1）、要求</p>
+<p>​    （a）、输入源来自Socket，和实验一一样。输出到控制台。</p>
+<p>​    （b）、自己开发一个Streaming的WordCount实现单词统计。</p>
+<p>​    （c）、使用到transform()算子。</p>
+<p>​    （d）、使用updateStateByKey()算子，可以对历史的单词出现的数量一起累计。</p>
+<p>（2）、原理</p>
+<p><img src="/SparkStreaming.htm/9.jpg" alt></p>
+<p>（3）、源码</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">from pyspark.streaming import StreamingContext</span><br><span class="line">from pyspark.sql import SparkSession</span><br><span class="line"></span><br><span class="line">spark = SparkSession.builder.appName(&quot;Streaming&quot;).getOrCreate()</span><br><span class="line">sc=spark.sparkContext</span><br><span class="line">ssc = StreamingContext(sc, 1) #两个参数：1、sc参数 2、采样时间间隔（秒）</span><br><span class="line">#设置检查点</span><br><span class="line">ssc.checkpoint(&apos;/home/lee/0529&apos;)</span><br><span class="line">ds1=ssc.socketTextStream(&apos;192.168.***.***&apos;,1234)</span><br><span class="line">ds2=ds1.flatMap(lambda line:line.split(&apos; &apos;))</span><br><span class="line">ds3=ds2.transform(lambda wordRDD:wordRDD.map(lambda word:(word,1)))</span><br><span class="line">#累加</span><br><span class="line">def updateFunc(newValues, runningValues):</span><br><span class="line">    if runningValues is None:</span><br><span class="line">        runningValues= 0</span><br><span class="line">    return sum(newValues, runningValues)</span><br><span class="line">ds4 = ds3.updateStateByKey(updateFunc)</span><br><span class="line">##定义输出到控制台</span><br><span class="line">ds4.pprint()</span><br><span class="line">ssc.start();ssc.awaitTermination()</span><br></pre></td></tr></table></figure>
+<p>（4）、运行结果</p>
+<p><img src="/SparkStreaming.htm/10.jpg" alt></p>
+<p><strong>4、流式日志过滤与分析</strong></p>
+<p>（1）、要求</p>
+<p>​    （a）、利用SparkStreaming从文件目录读入日志信息，日志内容包含：</p>
+<p>​        ”日志级别、函数名、日志内容“ 三个字段，字段之间以”\t”拆分。请看数据源的文件。</p>
+<p>​    （b）、对读入都日志信息流进行指定筛选出日志级别为error或warn的，并输出到外部MySQL中。</p>
+<p>（2）、思路</p>
+<p>​    （a）、输入采用textFileStream()算子<br>​    （b）、输出采用foreachRDD()算子<br>​    （c）、将RDD转为DataFrame<br>​    （d）、DataFrame注册为临时表，使用SQL过滤<br>​    （e）、将过滤后的数据保存到MySQL</p>
+<p>（3）、源码</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line">from pyspark.streaming import StreamingContext</span><br><span class="line">from pyspark.sql import SparkSession</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">spark = SparkSession.builder.appName(&quot;Streaming&quot;).master(&apos;local[2]&apos;).getOrCreate()</span><br><span class="line">sc=spark.sparkContext</span><br><span class="line"></span><br><span class="line">ssc = StreamingContext(sc, 1) #两个参数：1、sc参数 2、采样时间间隔（秒）</span><br><span class="line">#数据源--文件流</span><br><span class="line">ds1 = ssc.textFileStream(&apos;/home/lee/data&apos;)</span><br><span class="line">#自定义分词函数</span><br><span class="line">def func(rdd):</span><br><span class="line">    if not rdd.isEmpty():</span><br><span class="line">        #生成注册表</span><br><span class="line">        df = rdd.map(lambda line:tuple(line)).toDF(&quot;log_level : string, log_name : string , log_content : string&quot;)</span><br><span class="line">        df.registerTempTable(&quot;logs&quot;)</span><br><span class="line">        #过滤数据</span><br><span class="line">        df2 = df.filter(&quot;log_level = &apos;[error]&apos; or log_level = &apos;[warn]&apos;&quot;)</span><br><span class="line">        #客户端显示数据</span><br><span class="line">        spark.sql(&quot;select log_level ,log_name ,log_content from logs where log_level = &apos;[error]&apos; or log_level = &apos;[warn]&apos;&quot;).show()</span><br><span class="line">        #保存到数据库</span><br><span class="line">        #连接数据库的信息</span><br><span class="line">        url = &apos;jdbc:mysql://localhost:3306/spark?characterEncoding=utf-8&amp;autoReconnect=true&amp;useSSL=false&apos;</span><br><span class="line">        properties = &#123;&apos;user&apos;: &apos;root&apos;, &apos;password&apos;: &apos;root&apos;&#125;</span><br><span class="line">        df2.write.jdbc(url=url, table=&quot;logs&quot;, properties=properties,mode=&quot;append&quot;)</span><br><span class="line">#分词</span><br><span class="line">ds2 = ds1.map(lambda line:line.split(&apos;\t&apos;))</span><br><span class="line">ds2.foreachRDD(func)</span><br><span class="line">ssc.start();ssc.awaitTermination()</span><br></pre></td></tr></table></figure>
+<p>（4）、运行结果</p>
+<p><img src="/SparkStreaming.htm/11.jpg" alt></p>
+<p><img src="/SparkStreaming.htm/12.jpg" alt></p>
+<p>（5）、注意事项</p>
+<p>​    （a）、在虚拟机下选创建data文件夹，运行代码程序后，再将数据源通过FTP一个个放入data文件夹中，只有在程序运行中识别到data文件夹数据源的变化，才会有运行结果。</p>
+<p>​    （b）、在pycharm的话就需要将数据库的驱动拉到虚拟机的spark目录下的jars，然后再修改spark-env.sh</p>
+<p><img src="/SparkStreaming.htm/13.jpg" alt></p>
+<p>（6）、数据源</p>
+<p><a href="https://pan.baidu.com/s/1IA8JXIp59J3jYcoOL5RRxg" target="_blank" rel="noopener">https://pan.baidu.com/s/1IA8JXIp59J3jYcoOL5RRxg</a></p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/spark/" rel="tag"><i class="fa fa-tag"></i> spark</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/PEP8代码规范.html" rel="next" title="PEP8代码规范">
+                <i class="fa fa-chevron-left"></i> PEP8代码规范
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/uploads/avatar.jpg" alt="rnalee">
+            
+              <p class="site-author-name" itemprop="name">rnalee</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">9</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">5</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">5</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/rnalee" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:1695219395@qq.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#一、Spark-Streaming-概念"><span class="nav-number">1.</span> <span class="nav-text">一、Spark Streaming 概念</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#二、DStream"><span class="nav-number">2.</span> <span class="nav-text">二、DStream</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#三、Spark-Streaming-开发"><span class="nav-number">3.</span> <span class="nav-text">三、Spark Streaming 开发</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">rnalee</span>
+
+  
+</div>
+
+
+  <!--<div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a> v5.1.4</div>-->
+
+
+
+
+
+
+
+<script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<span id="busuanzi_container_site_pv">访问量:<span id="busuanzi_value_site_pv"></span>次</span>
+<span class="post-meta-divider">|</span>
+<span id="busuanzi_container_site_uv">访客数:<span id="busuanzi_value_site_uv"></span>人</span>
+<span class="post-meta-divider">|</span>
+ 
+
+
+<div class="theme-info">
+  <div class="powered-by"></div>
+  <span class="post-count">博客全站共9.8k字</span>
+</div>
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+          <span id="scrollpercent"><span>0</span>%</span>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
