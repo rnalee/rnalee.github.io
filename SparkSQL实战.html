@@ -88,7 +88,13 @@
 <meta property="og:description" content="摘要：DataFrame的常用操作、加载和保存；SparkSQL的常用操作…">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://yoursite.com/SparkSQL实战/1.jpg">
-<meta property="og:updated_time" content="2019-12-21T07:18:11.090Z">
+<meta property="og:image" content="http://yoursite.com/SparkSQL实战/2.jpg">
+<meta property="og:image" content="http://yoursite.com/SparkSQL实战/3.jpg">
+<meta property="og:image" content="http://yoursite.com/SparkSQL实战/4.jpg">
+<meta property="og:image" content="http://yoursite.com/SparkSQL实战/5.png">
+<meta property="og:image" content="http://yoursite.com/SparkSQL实战/6.jpg">
+<meta property="og:image" content="http://yoursite.com/SparkSQL实战/7.jpg">
+<meta property="og:updated_time" content="2019-12-21T07:52:04.094Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="SparkSQL实战">
 <meta name="twitter:description" content="摘要：DataFrame的常用操作、加载和保存；SparkSQL的常用操作…">
@@ -361,7 +367,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  21 字
+                  1.6k 字
                 </span>
               
 
@@ -377,7 +383,7 @@
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
                 <span title="阅读时长">
-                  1 分钟
+                  7 分钟
                 </span>
               
             </div>
@@ -400,8 +406,119 @@
       
         <p>摘要：DataFrame的常用操作、加载和保存；SparkSQL的常用操作…</p>
 <a id="more"></a>
-<p>待写……..</p>
+<h4 id="一、使用DataFrame分析出租车的-GPS信息"><a href="#一、使用DataFrame分析出租车的-GPS信息" class="headerlink" title="一、使用DataFrame分析出租车的 GPS信息"></a>一、使用DataFrame分析出租车的 GPS信息</h4><p>现有某地区出租车 GPS 定位数据 taxi.csv，部分数据如下：</p>
+<table>
+<thead>
+<tr>
+<th>编号（id）</th>
+<th>纬度（lat）</th>
+<th>经度（lon）</th>
+<th>时间戳（time）</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>30.624806</td>
+<td>104.136604</td>
+<td>211846</td>
+</tr>
+<tr>
+<td>1</td>
+<td>30.624809</td>
+<td>104.136612</td>
+<td>211815</td>
+</tr>
+<tr>
+<td>1</td>
+<td>30.624811</td>
+<td>104.136587</td>
+<td>212017</td>
+</tr>
+<tr>
+<td>1</td>
+<td>30.624811</td>
+<td>104.136596</td>
+<td>211916</td>
+</tr>
+<tr>
+<td>1</td>
+<td>30.624811</td>
+<td>104.136619</td>
+<td>211744</td>
+</tr>
+</tbody>
+</table>
+<p>数据一共分为 4 列（<u><strong>数据源已将表头删除</strong></u>）。</p>
+<p>现如下要求：</p>
+<p>​    a、查询编号为 5 的出租车的 GPS 数据的前 10 行。</p>
+<p>​    b、统计出租车的总数有多少。</p>
+<p>​    c、分别统计每辆出租车的GPS 点记录有多少条。</p>
+<p>1、完整源码</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">from pyspark.shell import sc</span><br><span class="line">from pyspark.sql.types import *</span><br><span class="line"></span><br><span class="line">inputFile = &apos;/home/lee/taxi.csv&apos;</span><br><span class="line">infoFile = sc.textFile(inputFile)</span><br><span class="line">rdd1 = infoFile.map(lambda x:x.split(&apos;,&apos;))</span><br><span class="line">rdd2 = rdd1.map(lambda x:tuple(x))</span><br><span class="line">rdd3 = rdd2.map(lambda arr:[int(arr[0]),float(arr[1]),float(arr[2]),arr[3]])</span><br><span class="line">schema = StructType([StructField(&quot;ID&quot;,IntegerType(),True),StructField(&quot;Lat&quot;,FloatType(),True),StructField(&quot;Lon&quot;,FloatType(),True),StructField(&quot;Time&quot;,  StringType(),True)])</span><br><span class="line">df = rdd3.toDF(schema)</span><br><span class="line">#查询编号为 5 的出租车的 GPS 数据的前 10 行</span><br><span class="line">id = df.filter(&apos;ID=5&apos;).show(10)</span><br><span class="line">#统计出租车的总数。</span><br><span class="line">count = df.select(&apos;ID&apos;).distinct().count()</span><br><span class="line">print(&apos;出租车的总数为%s&apos; % count)</span><br><span class="line">#分别统计每辆出租车的 GPS 点记录有多少条。</span><br><span class="line">GPS = df.groupBy(&quot;ID&quot;).count().orderBy(df.ID).show()</span><br></pre></td></tr></table></figure>
+<p>2、运行结果</p>
+<p>​    (a)查询编号为 5 的出租车的 GPS 数据的前 10 行。</p>
 <img src="/SparkSQL实战/1.jpg">
+<p>​    (b)统计出租车的总数有多少。</p>
+<img src="/SparkSQL实战/2.jpg">
+<p>​    (c)分别统计每辆出租车的 GPS 点记录有多少条。</p>
+<img src="/SparkSQL实战/3.jpg">
+<h4 id="二、使用SparkSQL分析图书信息"><a href="#二、使用SparkSQL分析图书信息" class="headerlink" title="二、使用SparkSQL分析图书信息"></a>二、使用SparkSQL分析图书信息</h4><p>现有图书数据book.txt，数据内容举例如下：</p>
+<table>
+<thead>
+<tr>
+<th>序号</th>
+<th>书名</th>
+<th>评分</th>
+<th>价格</th>
+<th>价格</th>
+<th>url</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>40332</td>
+<td>简爱</td>
+<td>8.8</td>
+<td>29.80元</td>
+<td>上海世界图书出版公司</td>
+<td><a href="https://book.douban.com/subject/" target="_blank" rel="noopener">https://book.douban.com/subject/</a></td>
+</tr>
+</tbody>
+</table>
+<p>数据一共分为6列，列与列之间以逗号（,）分割。</p>
+<p>​    （1）创建RDD</p>
+<p>​    （2）将RDD转为DataFrame</p>
+<p>​    （3）调用registerTempTable，注册为表，表名为：tb_book</p>
+<p>​    （4）使用使用sql语句查询前15条</p>
+<p>​    （5）模糊查询书名包含“微积分”的书</p>
+<p>​    （6）输出图书的前10行的name和price字段信息</p>
+<p>​    （7）统计书名包含“微积分”的书的数量</p>
+<p>​    （8）查询评分大于9的图书，，且只展示前10条</p>
+<p>​    （9）计算所有书名包含“微积分”的评分平均值</p>
+<p>​    （10）把书目按照评分从高到低进行排列，且只展示前15条</p>
+<p>​    （11）把图书按照出版社进行分组，统计出不同出版社图书的总数</p>
+<p>1、完整源码</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line">from pyspark.shell import sc, spark</span><br><span class="line">from pyspark.sql.types import *</span><br><span class="line"></span><br><span class="line">inputFile = &apos;/home/lee/book.txt&apos;</span><br><span class="line">infoFile = sc.textFile(inputFile)</span><br><span class="line">rdd1 = infoFile.map(lambda x:x.split(&apos;,&apos;))</span><br><span class="line">#去掉数据中第一个标题数据</span><br><span class="line">def f(x):</span><br><span class="line">    if x[0] == &apos;序号&apos;:</span><br><span class="line">        del x</span><br><span class="line">    else:</span><br><span class="line">        return x</span><br><span class="line">rdd2 = rdd1.filter(f)</span><br><span class="line">rdd3 = rdd2.map(lambda x:tuple(x))</span><br><span class="line">rdd4 = rdd3.map(lambda arr:[int(arr[0]),arr[1],float(arr[2]),arr[3],arr[4],arr[5]])</span><br><span class="line">schema = StructType([StructField(&quot;ID&quot;,IntegerType(),True),StructField(&quot;name&quot;,StringType(),True),StructField(&quot;score&quot;,FloatType(),True),StructField(&quot;price&quot;,  StringType(),True),StructField(&quot;pub&quot;,  StringType(),True),StructField(&quot;url&quot;,  StringType(),True)])</span><br><span class="line">#（2）将RDD转为DataFrame</span><br><span class="line">df = rdd4.toDF(schema)</span><br><span class="line">#输出前5条DataFrame</span><br><span class="line">print(df.take(5))</span><br><span class="line">#（3）调用registerTempTable，注册为表，表名为：tb_book</span><br><span class="line">table = df.registerTempTable(&apos;tb_book&apos;)</span><br><span class="line">#（4）使用使用sql语句查询前15条</span><br><span class="line">before = spark.sql(&quot;select * from tb_book&quot;).show(15)</span><br><span class="line">#（5）模糊查询书名包含“微积分”的书</span><br><span class="line">like = spark.sql(&quot;select * from tb_book where name like &apos;%微积分%&apos;&quot;).show()</span><br><span class="line">#（6）输出图书的前10行的name和price字段信息</span><br><span class="line">ten = spark.sql(&quot;select name,price from tb_book &quot;).show(10)</span><br><span class="line">#（7）统计书名包含“微积分”的书的数量</span><br><span class="line">count = spark.sql(&quot;select count(name) from tb_book where name like &apos;%微积分%&apos;&quot;).show()</span><br><span class="line">#（8）查询评分大于9的图书，且只展示前10条</span><br><span class="line">score = spark.sql(&quot;select * from tb_book where score &gt; 9&quot;).show(10)</span><br><span class="line">#（9）计算所有书名包含“微积分”的评分平均值</span><br><span class="line">avg = spark.sql(&quot;select avg(score) from tb_book where name like &apos;%微积分%&apos;&quot;).show()</span><br><span class="line">#（10）把书目按照评分从高到低进行排列，且只展示前15条</span><br><span class="line">score = spark.sql(&quot;select * from tb_book order by score desc &quot;).show(15)</span><br><span class="line">#（11）把图书按照出版社进行分组，统计出不同出版社图书的总数</span><br><span class="line">group = spark.sql(&quot;select pub,count(pub) from tb_book group by pub&quot;).show()</span><br></pre></td></tr></table></figure>
+<p>2、运行结果<u>（部分）</u></p>
+<p>​    （8）查询评分大于9的图书，且只展示前10条</p>
+<img src="/SparkSQL实战/4.jpg">
+<h4 id="三、DataFrame的保存和加载"><a href="#三、DataFrame的保存和加载" class="headerlink" title="三、DataFrame的保存和加载"></a>三、DataFrame的保存和加载</h4><p><strong><u>【保存加载示例】</u></strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">parquet文件的加载示例：</span><br><span class="line">userDF = spark.read.load(&quot;/home/lee/users.parquet&quot;)</span><br><span class="line"></span><br><span class="line">json文件的加载示例：</span><br><span class="line">peopleDF = spark.read.json(&quot;/home/lee/people.json&quot;)</span><br><span class="line">peopleDF = spark.read.format(&quot;json&quot;).load(&quot;/home/lee/people.json&quot;)</span><br><span class="line"></span><br><span class="line">保存到parquet文件示例：</span><br><span class="line">userDF.select(&quot;name&quot;,&quot;favorite_color&quot;).write.save(&quot;/home/lee/result1&quot;)</span><br><span class="line">userDF.select(&quot;name&quot;,&quot;favorite_color&quot;).write.mode(&quot;overwrite&quot;).save(&quot;/home/lee/result1&quot;)</span><br><span class="line"></span><br><span class="line">保存到csv文件示例：</span><br><span class="line">userDF.select(&quot;name&quot;,&quot;favorite_color&quot;).write.format(&quot;csv&quot;).save(&quot;/home/lee/result2&quot;)</span><br><span class="line">userDF.select(&quot;name&quot;,&quot;favorite_color&quot;).write.csv(&quot;/home/lee/temp/result3&quot;)</span><br></pre></td></tr></table></figure>
+<p>（1）在实战二的基础上，将书名包含“微积分”的书记录保存到本地或HDFS上，</p>
+<p>且保存的格式为csv。</p>
+<p>（2）然后再从该csv文件加载，创建DataFrame，并查询和显示。</p>
+<p>1、完整源码</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">from pyspark.shell import sc, spark</span><br><span class="line">from pyspark.sql.types import *</span><br><span class="line"></span><br><span class="line">inputFile = &apos;/home/lee/book.txt&apos;</span><br><span class="line">infoFile = sc.textFile(inputFile)</span><br><span class="line">rdd1 = infoFile.map(lambda x:x.split(&apos;,&apos;))</span><br><span class="line">#去掉数据中第一个标题数据</span><br><span class="line">def f(x):</span><br><span class="line">    if x[0] == &apos;序号&apos;:</span><br><span class="line">        del x</span><br><span class="line">    else:</span><br><span class="line">        return x</span><br><span class="line">rdd2 = rdd1.filter(f)</span><br><span class="line">rdd3 = rdd2.map(lambda x:tuple(x))</span><br><span class="line">rdd4 = rdd3.map(lambda arr:[int(arr[0]),arr[1],float(arr[2]),arr[3],arr[4],arr[5]])</span><br><span class="line">schema = StructType([StructField(&quot;ID&quot;,IntegerType(),True),StructField(&quot;name&quot;,StringType(),True),StructField(&quot;score&quot;,FloatType(),True),StructField(&quot;price&quot;,  StringType(),True),StructField(&quot;pub&quot;,  StringType(),True),StructField(&quot;url&quot;,  StringType(),True)])</span><br><span class="line">df = rdd4.toDF(schema)</span><br><span class="line">#保存微积分相关文件</span><br><span class="line"># csv = df.filter(&quot;name like &apos;%微积分%&apos;&quot;).write.format(&quot;csv&quot;).save(&quot;/home/lee/1**********8&quot;)</span><br><span class="line">#再从该csv文件加载，创建DataFrame，并查询和显示</span><br><span class="line">csvDF = spark.read.format(&quot;csv&quot;).load(&quot;/home/lee/1**********8/1**********8.csv&quot;)</span><br><span class="line">print(csvDF.collect())</span><br><span class="line">csvDF.show()</span><br></pre></td></tr></table></figure>
+<p>2、运行结果</p>
+<p>​    （1）在实战的基础上，将书名包含“微积分”的书记录保存到本地或HDFS上，且保存的格式为csv</p>
+<img src="/SparkSQL实战/5.png">
+<p>​    （2）然后再从该csv文件加载，创建DataFrame，并查询和显示。</p>
+<img src="/SparkSQL实战/6.jpg">
+<img src="/SparkSQL实战/7.jpg">
+<p><strong>附：</strong></p>
+<p>数据源：<a href="https://pan.baidu.com/s/1qpKWQVmORsDQelWM8-qxQQ" target="_blank" rel="noopener">https://pan.baidu.com/s/1qpKWQVmORsDQelWM8-qxQQ</a></p>
+
       
     </div>
     
@@ -491,8 +608,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -571,6 +697,22 @@
       </section>
 
       
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#一、使用DataFrame分析出租车的-GPS信息"><span class="nav-number">1.</span> <span class="nav-text">一、使用DataFrame分析出租车的 GPS信息</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#二、使用SparkSQL分析图书信息"><span class="nav-number">2.</span> <span class="nav-text">二、使用SparkSQL分析图书信息</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#三、DataFrame的保存和加载"><span class="nav-number">3.</span> <span class="nav-text">三、DataFrame的保存和加载</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
 
       
 
@@ -612,7 +754,7 @@
 
 <div class="theme-info">
   <div class="powered-by"></div>
-  <span class="post-count">博客全站共9.9k字</span>
+  <span class="post-count">博客全站共11.4k字</span>
 </div>
 
         
