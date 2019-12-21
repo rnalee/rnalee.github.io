@@ -87,24 +87,24 @@
 <meta property="og:site_name" content="李先生">
 <meta property="og:description" content="摘要：SparkStreaming是一个高吞吐、高容错的实时流处理系统，其核心为DStream..">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="http://yoursite.com/1.jpg">
-<meta property="og:image" content="http://yoursite.com/2.jpg">
-<meta property="og:image" content="http://yoursite.com/3.jpg">
-<meta property="og:image" content="http://yoursite.com/4.jpg">
-<meta property="og:image" content="http://yoursite.com/5.jpg">
-<meta property="og:image" content="http://yoursite.com/6.jpg">
-<meta property="og:image" content="http://yoursite.com/7.jpg">
-<meta property="og:image" content="http://yoursite.com/8.jpg">
-<meta property="og:image" content="http://yoursite.com/9.jpg">
-<meta property="og:image" content="http://yoursite.com/10.jpg">
-<meta property="og:image" content="http://yoursite.com/11.jpg">
-<meta property="og:image" content="http://yoursite.com/12.jpg">
-<meta property="og:image" content="http://yoursite.com/13.jpg">
-<meta property="og:updated_time" content="2019-12-21T02:02:43.681Z">
+<meta property="og:image" content="http://yoursite.com/SparkStreaming/1.jpg">
+<meta property="og:image" content="http://yoursite.com/SparkStreaming/2.jpg">
+<meta property="og:image" content="http://yoursite.com/SparkStreaming/3.jpg">
+<meta property="og:image" content="http://yoursite.com/SparkStreaming/4.jpg">
+<meta property="og:image" content="http://yoursite.com/SparkStreaming/5.jpg">
+<meta property="og:image" content="http://yoursite.com/SparkStreaming/6.jpg">
+<meta property="og:image" content="http://yoursite.com/SparkStreaming/7.jpg">
+<meta property="og:image" content="http://yoursite.com/SparkStreaming/8.jpg">
+<meta property="og:image" content="http://yoursite.com/SparkStreaming/9.jpg">
+<meta property="og:image" content="http://yoursite.com/SparkStreaming/10.jpg">
+<meta property="og:image" content="http://yoursite.com/SparkStreaming/11.jpg">
+<meta property="og:image" content="http://yoursite.com/SparkStreaming/12.jpg">
+<meta property="og:image" content="http://yoursite.com/SparkStreaming/13.jpg">
+<meta property="og:updated_time" content="2019-12-21T04:39:05.486Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="SparkStreaming">
 <meta name="twitter:description" content="摘要：SparkStreaming是一个高吞吐、高容错的实时流处理系统，其核心为DStream..">
-<meta name="twitter:image" content="http://yoursite.com/1.jpg">
+<meta name="twitter:image" content="http://yoursite.com/SparkStreaming/1.jpg">
 
 
 
@@ -413,14 +413,14 @@
         <p>摘要：SparkStreaming是一个高吞吐、高容错的实时流处理系统，其核心为DStream..</p>
 <a id="more"></a>
 <h4 id="一、Spark-Streaming-概念"><a href="#一、Spark-Streaming-概念" class="headerlink" title="一、Spark Streaming 概念"></a>一、Spark Streaming 概念</h4><p>​    SparkStreaming是一个高吞吐、高容错的实时流处理系统，其核心为DStream（Discretized stream），且基于SparkCore，基于RDD的检查点（Checkpoint）实现容错机制。处理模式为Batch（微批处理），既输入流被切分成微批量数据，分开处理。</p>
-<p><img src="//yoursite.com/1.jpg" alt></p>
+<img src="/SparkStreaming/1.jpg">
 <p>​    特点：（1）、吞吐量高/性能高；（2）、延迟在秒级</p>
 <h4 id="二、DStream"><a href="#二、DStream" class="headerlink" title="二、DStream"></a>二、DStream</h4><p>1、概念</p>
 <p>​    DStream，离散数据流，是Spark Streaming对流式数据的基本抽象，代表了连续的流式数据。DStream中，每个RDD都包含一定时间间隔内的数据。</p>
 <p>2、创建方式</p>
 <p>​    （1）、从数据流上直接创建</p>
 <p>​    （2）、从已有的DStream变换创建    </p>
-<p><img src="//yoursite.com/2.jpg" alt></p>
+<img src="/SparkStreaming/2.jpg">
 <p>3、转换算子</p>
 <table>
 <thead>
@@ -516,21 +516,21 @@
 </tbody>
 </table>
 <h4 id="三、Spark-Streaming-开发"><a href="#三、Spark-Streaming-开发" class="headerlink" title="三、Spark Streaming 开发"></a>三、Spark Streaming 开发</h4><p><strong>1、基于netcat的聊天室</strong></p>
-<p><img src="//yoursite.com/3.jpg" alt></p>
+<img src="/SparkStreaming/3.jpg">
 <p>（1）在Linux下，启动NetCat服务端，并在1234端口监听<br><code>$ nc -lk 1234</code><br>（2）在Linux下，启动NetCat客户端，并连接Netcat服务端<br><code>$ nc localhost 1234</code><br>（3）在服务端输入字符串，并按回车，可以在客户端收到消息，并打印出来。</p>
-<p><img src="//yoursite.com/4.jpg" alt></p>
+<img src="/SparkStreaming/4.jpg">
 <p>（4）在客户端输入字符串，并按回车，可以在服务端收到消息，并打印出来。</p>
-<p><img src="//yoursite.com/5.jpg" alt></p>
+<img src="/SparkStreaming/5.jpg">
 <p><strong>2、运行网络版的WordCount</strong></p>
-<p><img src="//yoursite.com/6.jpg" alt></p>
+<img src="/SparkStreaming/6.jpg">
 <p>（1）保持服务端在监听</p>
 <p>（2）客户端和服务端建立连接,并统计单词数量</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ cd ~/spark</span><br><span class="line"></span><br><span class="line">$ bin/run-example streaming.NetworkWordCount localhost 1234</span><br></pre></td></tr></table></figure>
 <p>（3）在服务端输入字符串，并按回车，观察Streaming WordCount的输出。</p>
-<p><img src="//yoursite.com/7.jpg" alt></p>
+<img src="/SparkStreaming/7.jpg">
 <p><strong><u>注意事项：</u></strong></p>
 <p>​    （a）、如果执行本案例，必须确保机器CPU核数&gt;=2(接收器+处理接收的数据,接收器如果是多个，要大于接收器的数量，Local线程数大于接收器数量)</p>
-<p><img src="//yoursite.com/8.jpg" alt></p>
+<img src="/SparkStreaming/8.jpg">
 <p>​    （b）、修改conf/log4j.properties            </p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">log4j.rootCategory=WARN, console</span><br></pre></td></tr></table></figure>
 <p>​    （c）、要启动spark standalone</p>
@@ -541,11 +541,11 @@
 <p>​    （c）、使用到transform()算子。</p>
 <p>​    （d）、使用updateStateByKey()算子，可以对历史的单词出现的数量一起累计。</p>
 <p>（2）、原理</p>
-<p><img src="//yoursite.com/9.jpg" alt></p>
+<img src="/SparkStreaming/9.jpg">
 <p>（3）、源码</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">from pyspark.streaming import StreamingContext</span><br><span class="line">from pyspark.sql import SparkSession</span><br><span class="line"></span><br><span class="line">spark = SparkSession.builder.appName(&quot;Streaming&quot;).getOrCreate()</span><br><span class="line">sc=spark.sparkContext</span><br><span class="line">ssc = StreamingContext(sc, 1) #两个参数：1、sc参数 2、采样时间间隔（秒）</span><br><span class="line">#设置检查点</span><br><span class="line">ssc.checkpoint(&apos;/home/lee/0529&apos;)</span><br><span class="line">ds1=ssc.socketTextStream(&apos;192.168.***.***&apos;,1234)</span><br><span class="line">ds2=ds1.flatMap(lambda line:line.split(&apos; &apos;))</span><br><span class="line">ds3=ds2.transform(lambda wordRDD:wordRDD.map(lambda word:(word,1)))</span><br><span class="line">#累加</span><br><span class="line">def updateFunc(newValues, runningValues):</span><br><span class="line">    if runningValues is None:</span><br><span class="line">        runningValues= 0</span><br><span class="line">    return sum(newValues, runningValues)</span><br><span class="line">ds4 = ds3.updateStateByKey(updateFunc)</span><br><span class="line">##定义输出到控制台</span><br><span class="line">ds4.pprint()</span><br><span class="line">ssc.start();ssc.awaitTermination()</span><br></pre></td></tr></table></figure>
 <p>（4）、运行结果</p>
-<p><img src="//yoursite.com/10.jpg" alt></p>
+<img src="/SparkStreaming/10.jpg">
 <p><strong>4、流式日志过滤与分析</strong></p>
 <p>（1）、要求</p>
 <p>​    （a）、利用SparkStreaming从文件目录读入日志信息，日志内容包含：</p>
@@ -556,12 +556,12 @@
 <p>（3）、源码</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line">from pyspark.streaming import StreamingContext</span><br><span class="line">from pyspark.sql import SparkSession</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">spark = SparkSession.builder.appName(&quot;Streaming&quot;).master(&apos;local[2]&apos;).getOrCreate()</span><br><span class="line">sc=spark.sparkContext</span><br><span class="line"></span><br><span class="line">ssc = StreamingContext(sc, 1) #两个参数：1、sc参数 2、采样时间间隔（秒）</span><br><span class="line">#数据源--文件流</span><br><span class="line">ds1 = ssc.textFileStream(&apos;/home/lee/data&apos;)</span><br><span class="line">#自定义分词函数</span><br><span class="line">def func(rdd):</span><br><span class="line">    if not rdd.isEmpty():</span><br><span class="line">        #生成注册表</span><br><span class="line">        df = rdd.map(lambda line:tuple(line)).toDF(&quot;log_level : string, log_name : string , log_content : string&quot;)</span><br><span class="line">        df.registerTempTable(&quot;logs&quot;)</span><br><span class="line">        #过滤数据</span><br><span class="line">        df2 = df.filter(&quot;log_level = &apos;[error]&apos; or log_level = &apos;[warn]&apos;&quot;)</span><br><span class="line">        #客户端显示数据</span><br><span class="line">        spark.sql(&quot;select log_level ,log_name ,log_content from logs where log_level = &apos;[error]&apos; or log_level = &apos;[warn]&apos;&quot;).show()</span><br><span class="line">        #保存到数据库</span><br><span class="line">        #连接数据库的信息</span><br><span class="line">        url = &apos;jdbc:mysql://localhost:3306/spark?characterEncoding=utf-8&amp;autoReconnect=true&amp;useSSL=false&apos;</span><br><span class="line">        properties = &#123;&apos;user&apos;: &apos;root&apos;, &apos;password&apos;: &apos;root&apos;&#125;</span><br><span class="line">        df2.write.jdbc(url=url, table=&quot;logs&quot;, properties=properties,mode=&quot;append&quot;)</span><br><span class="line">#分词</span><br><span class="line">ds2 = ds1.map(lambda line:line.split(&apos;\t&apos;))</span><br><span class="line">ds2.foreachRDD(func)</span><br><span class="line">ssc.start();ssc.awaitTermination()</span><br></pre></td></tr></table></figure>
 <p>（4）、运行结果</p>
-<p><img src="//yoursite.com/11.jpg" alt></p>
-<p><img src="//yoursite.com/12.jpg" alt></p>
+<img src="/SparkStreaming/11.jpg">
+<img src="/SparkStreaming/12.jpg">
 <p>（5）、注意事项</p>
 <p>​    （a）、在虚拟机下选创建data文件夹，运行代码程序后，再将数据源通过FTP一个个放入data文件夹中，只有在程序运行中识别到data文件夹数据源的变化，才会有运行结果。</p>
 <p>​    （b）、在pycharm的话就需要将数据库的驱动拉到虚拟机的spark目录下的jars，然后再修改spark-env.sh</p>
-<p><img src="//yoursite.com/13.jpg" alt></p>
+<img src="/SparkStreaming/13.jpg">
 <p>（6）、数据源</p>
 <p><a href="https://pan.baidu.com/s/1IA8JXIp59J3jYcoOL5RRxg" target="_blank" rel="noopener">https://pan.baidu.com/s/1IA8JXIp59J3jYcoOL5RRxg</a></p>
 

@@ -2,6 +2,20 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://yoursite.com/SparkSQL%E5%AE%9E%E6%88%98.html</loc>
+    
+    <lastmod>2019-12-21T04:39:26.941Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://yoursite.com/SparkStreaming.html</loc>
+    
+    <lastmod>2019-12-21T04:39:05.486Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>http://yoursite.com/PEP8%E4%BB%A3%E7%A0%81%E8%A7%84%E8%8C%83.html</loc>
     
     <lastmod>2019-12-21T04:37:25.815Z</lastmod>
@@ -54,20 +68,6 @@
     <loc>http://yoursite.com/Django%E7%AE%80%E4%BB%8B.html</loc>
     
     <lastmod>2019-12-21T04:11:11.574Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://yoursite.com/SparkSQL%E5%AE%9E%E6%88%98.html</loc>
-    
-    <lastmod>2019-12-21T04:07:39.673Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://yoursite.com/SparkStreaming.html</loc>
-    
-    <lastmod>2019-12-21T02:02:43.681Z</lastmod>
     
   </url>
   
