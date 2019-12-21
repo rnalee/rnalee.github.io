@@ -87,21 +87,21 @@
 <meta property="og:site_name" content="李先生">
 <meta property="og:description" content="摘要：SparkSQL是Spark用来处理结构化数据的一个模块，它提供了一个编程抽象DataFrame并且作为分布式SQL查询引擎..">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="http://yoursite.com/SparkSQL.htm/1.jpg">
-<meta property="og:image" content="http://yoursite.com/SparkSQL.htm/2.jpg">
-<meta property="og:image" content="http://yoursite.com/SparkSQL.htm/3.jpg">
-<meta property="og:image" content="http://yoursite.com/SparkSQL.htm/4.jpg">
-<meta property="og:image" content="http://yoursite.com/SparkSQL.htm/5.jpg">
-<meta property="og:image" content="http://yoursite.com/SparkSQL.htm/6.jpg">
-<meta property="og:image" content="http://yoursite.com/SparkSQL.htm/7.jpg">
-<meta property="og:image" content="http://yoursite.com/SparkSQL.htm/8.jpg">
-<meta property="og:image" content="http://yoursite.com/SparkSQL.htm/9.jpg">
-<meta property="og:image" content="http://yoursite.com/SparkSQL.htm/10.jpg">
+<meta property="og:image" content="http://yoursite.com/1.jpg">
+<meta property="og:image" content="http://yoursite.com/2.jpg">
+<meta property="og:image" content="http://yoursite.com/3.jpg">
+<meta property="og:image" content="http://yoursite.com/4.jpg">
+<meta property="og:image" content="http://yoursite.com/5.jpg">
+<meta property="og:image" content="http://yoursite.com/6.jpg">
+<meta property="og:image" content="http://yoursite.com/7.jpg">
+<meta property="og:image" content="http://yoursite.com/8.jpg">
+<meta property="og:image" content="http://yoursite.com/9.jpg">
+<meta property="og:image" content="http://yoursite.com/10.jpg">
 <meta property="og:updated_time" content="2019-12-18T08:43:30.718Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="SparkSQL">
 <meta name="twitter:description" content="摘要：SparkSQL是Spark用来处理结构化数据的一个模块，它提供了一个编程抽象DataFrame并且作为分布式SQL查询引擎..">
-<meta name="twitter:image" content="http://yoursite.com/SparkSQL.htm/1.jpg">
+<meta name="twitter:image" content="http://yoursite.com/1.jpg">
 
 
 
@@ -413,7 +413,7 @@
 <p>（2）、统一的数据访问方式</p>
 <p>（3）、兼容Hive</p>
 <p>（4）、标准的数据连接</p>
-<h4 id="二、SparkSQL的使用过程"><a href="#二、SparkSQL的使用过程" class="headerlink" title="二、SparkSQL的使用过程"></a>二、SparkSQL的使用过程</h4><p><img src="/SparkSQL.htm/1.jpg" alt></p>
+<h4 id="二、SparkSQL的使用过程"><a href="#二、SparkSQL的使用过程" class="headerlink" title="二、SparkSQL的使用过程"></a>二、SparkSQL的使用过程</h4><p><img src="//yoursite.com/1.jpg" alt></p>
 <h4 id="三、DataFrame的创建"><a href="#三、DataFrame的创建" class="headerlink" title="三、DataFrame的创建"></a>三、DataFrame的创建</h4><p><strong>1、DataFrame概述</strong></p>
 <p>​    DataFrame 一个分布式数据容器很像传统关系数据库的二维表格，Schema是结构信息，和Hive一样，支持嵌套数据类型（struct、array、map），同时提供高层级的关系操作，比RDD API更简单更易用。</p>
 <p><strong>2、采用RDD的toDF（）算子创建</strong></p>
@@ -429,17 +429,17 @@
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">from pyspark.sql.types import Row</span><br><span class="line"></span><br><span class="line">rdd1 = sc.parallelize([Row(&apos;Michael&apos;, 29),Row(&apos;Andy&apos;, 30),Row(&apos;Justin&apos;, 19)])</span><br><span class="line">df = rdd1.toDF()</span><br><span class="line">df.collect()</span><br></pre></td></tr></table></figure>
 <p><strong>3、采用spark.createDataFrame()将RDD转为DataFrame</strong></p>
 <p>​    （1）data每行数据为元组，没有指定schema。</p>
-<p><img src="/SparkSQL.htm/2.jpg" alt></p>
+<p><img src="//yoursite.com/2.jpg" alt></p>
 <p>​    （2）data每行数据是dict，没有指定schema。</p>
-<p><img src="/SparkSQL.htm/3.jpg" alt></p>
+<p><img src="//yoursite.com/3.jpg" alt></p>
 <p>​    （3）data用RDD，没有指定schema。</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">rdd = sc.parallelize([(&apos;Alice&apos;, 1)])</span><br><span class="line"></span><br><span class="line">spark.createDataFrame(rdd).collect()</span><br></pre></td></tr></table></figure>
 <p>​    （4）data每行数据用Row，没有指定schema。</p>
-<p><img src="/SparkSQL.htm/4.jpg" alt></p>
+<p><img src="//yoursite.com/4.jpg" alt></p>
 <p>​    （5）data每行数据用元组，指定schema为列表。</p>
-<p><img src="/SparkSQL.htm/5.jpg" alt></p>
+<p><img src="//yoursite.com/5.jpg" alt></p>
 <p>​    （6）data用RDD，指定schema为列表。</p>
-<p><img src="/SparkSQL.htm/6.jpg" alt></p>
+<p><img src="//yoursite.com/6.jpg" alt></p>
 <p>​    （7）data用RDD，指定schema为StructType。</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">from pyspark.sql.types import *</span><br><span class="line"></span><br><span class="line">schema = StructType([StructField(&quot;name&quot;, StringType(), True),StructField(&quot;age&quot;, IntegerType(), True)])</span><br><span class="line"></span><br><span class="line">df3 = spark.createDataFrame(rdd, schema)</span><br><span class="line"></span><br><span class="line">df3.collect()</span><br></pre></td></tr></table></figure>
 <p>​    （8）data用RDD，指定schema为”fieldName:fieldType”。</p>
@@ -448,13 +448,13 @@
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">rdd=sc.parallelize([18])</span><br><span class="line"></span><br><span class="line">spark.createDataFrame(rdd, &quot;int&quot;).collect()</span><br></pre></td></tr></table></figure>
 <p><strong>4、DataFrame的操作</strong></p>
 <p>​    （1）df.show() </p>
-<p><img src="/SparkSQL.htm/7.jpg" alt></p>
+<p><img src="//yoursite.com/7.jpg" alt></p>
 <p>​    （2）df.printSchema()</p>
-<p><img src="/SparkSQL.htm/8.jpg" alt></p>
+<p><img src="//yoursite.com/8.jpg" alt></p>
 <p>​    （3）df.dtypes</p>
-<p><img src="/SparkSQL.htm/9.jpg" alt></p>
+<p><img src="//yoursite.com/9.jpg" alt></p>
 <p>​    （4）DSL（以下图的emp_df表为例）</p>
-<p><img src="/SparkSQL.htm/10.jpg" alt></p>
+<p><img src="//yoursite.com/10.jpg" alt></p>
 <p>​        a.注册表（table）</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">emp_df.registerTempTable(&quot;emp_temp_table&quot;)</span><br></pre></td></tr></table></figure>
 <p>​        b.查询所有的员工姓名</p>
