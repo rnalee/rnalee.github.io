@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
+    <loc>http://yoursite.com/SparkCore.html</loc>
+    <lastmod>2019-12-21</lastmod>
+  </url>  <url>
     <loc>http://yoursite.com/hadoop%E5%AE%89%E8%A3%85.html</loc>
     <lastmod>2019-12-21</lastmod>
   </url>  <url>
@@ -23,9 +26,6 @@
     <lastmod>2019-12-19</lastmod>
   </url>  <url>
     <loc>http://yoursite.com/%E7%B3%AF%E7%B1%B3%E7%A5%A8%E6%88%BF.html</loc>
-    <lastmod>2019-12-19</lastmod>
-  </url>  <url>
-    <loc>http://yoursite.com/SparkCore.html</loc>
     <lastmod>2019-12-19</lastmod>
   </url>  <url>
     <loc>http://yoursite.com/SparkSQL.html</loc>
