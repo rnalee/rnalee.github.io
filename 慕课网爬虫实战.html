@@ -93,7 +93,7 @@
 <meta property="og:image" content="http://yoursite.com/慕课网爬虫实战/4.jpg">
 <meta property="og:image" content="http://yoursite.com/慕课网爬虫实战/5.jpg">
 <meta property="og:image" content="http://yoursite.com/慕课网爬虫实战/6.jpg">
-<meta property="og:updated_time" content="2019-12-23T01:14:20.479Z">
+<meta property="og:updated_time" content="2019-12-24T07:58:56.624Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="慕课网爬虫实战">
 <meta name="twitter:description" content="摘要：基于XPath的慕课网免费课程信息爬虫..">
@@ -366,7 +366,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  805 字
+                  804 字
                 </span>
               
 
@@ -405,8 +405,7 @@
       
         <p>摘要：基于XPath的慕课网免费课程信息爬虫..</p>
 <a id="more"></a>
-<p><strong>一、XPath用法</strong></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">from lxml import etree</span><br><span class="line"></span><br><span class="line">page = etree.HTML(html_doc)</span><br></pre></td></tr></table></figure>
+<h4 id="一、XPath用法"><a href="#一、XPath用法" class="headerlink" title="一、XPath用法"></a>一、XPath用法</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">from lxml import etree</span><br><span class="line"></span><br><span class="line">page = etree.HTML(html_doc)</span><br></pre></td></tr></table></figure>
 <table>
 <thead>
 <tr>
@@ -462,8 +461,7 @@
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">In [<span class="number">5</span>]: page.xpath(<span class="string">'//book'</span>)[<span class="number">0</span>].xpath(<span class="string">'@category'</span>)</span><br><span class="line">Out[<span class="number">5</span>]: [<span class="string">'COOKING'</span>]</span><br></pre></td></tr></table></figure>
 </li>
 </ul>
-<p><strong>二、慕课网免费课程爬虫分析</strong></p>
-<p>从<a href="https://www.imooc.com/course/list" target="_blank" rel="noopener">https://www.imooc.com/course/list</a> 中 爬取各个方向的课程名字，课程难度，课程热度及课程简介的信息，并写入本地文件。</p>
+<h4 id="二、慕课网免费课程爬虫分析"><a href="#二、慕课网免费课程爬虫分析" class="headerlink" title="二、慕课网免费课程爬虫分析"></a>二、慕课网免费课程爬虫分析</h4><p>从<a href="https://www.imooc.com/course/list" target="_blank" rel="noopener">https://www.imooc.com/course/list</a> 中 爬取各个方向的课程名字，课程难度，课程热度及课程简介的信息，并写入本地文件。</p>
 <img src="/慕课网爬虫实战/1.jpg">
 <p>1、点击各个方向，分析其链接。通过分析各个方向的链接为<a href="http://www.imooc.com/course/list?c=***，则需要获取c的值即可拼接出各个方向的链接。在谷歌使用xpath" target="_blank" rel="noopener">http://www.imooc.com/course/list?c=***，则需要获取c的值即可拼接出各个方向的链接。在谷歌使用xpath</a> helper插件获取c的值。</p>
 <img src="/慕课网爬虫实战/2.jpg">
@@ -474,7 +472,7 @@
 <p>4、运行结果</p>
 <img src="/慕课网爬虫实战/5.jpg">
 <img src="/慕课网爬虫实战/6.jpg">
-<p><strong>附:完整源码</strong></p>
+<h5 id="附"><a href="#附" class="headerlink" title="附:"></a>附:</h5><p><strong>完整源码</strong></p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> requests</span><br><span class="line"><span class="keyword">from</span> lxml <span class="keyword">import</span> etree</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Course</span><span class="params">(object)</span>:</span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self)</span>:</span></span><br><span class="line">        self.header = &#123;</span><br><span class="line">            <span class="string">'User-Agent'</span>: <span class="string">'Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/79.0.3945.79 Safari/537.36'</span>,</span><br><span class="line">            <span class="string">'Accept - Language'</span>: <span class="string">'zh - CN, zh;q = 0.9'</span>,</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">    <span class="string">'''获取链接'''</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">getUrl</span><span class="params">(self)</span>:</span></span><br><span class="line">        url = <span class="string">'http://www.imooc.com/course/list'</span></span><br><span class="line">        content = requests.get(url = url,headers = self.header)</span><br><span class="line">        selector = etree.HTML(content.text)</span><br><span class="line">        items = selector.xpath(<span class="string">'//*[@id="main"]/div[1]/div/div[2]/div/div[1]/div/ul'</span>)</span><br><span class="line">        <span class="keyword">for</span> item <span class="keyword">in</span> items:</span><br><span class="line">            s = item.xpath(<span class="string">'li/a/@data-ct'</span>)</span><br><span class="line">            <span class="keyword">for</span> c <span class="keyword">in</span> s:</span><br><span class="line">                <span class="keyword">yield</span> <span class="string">'http://www.imooc.com/course/list?c='</span>+ c</span><br><span class="line"></span><br><span class="line">    <span class="string">'''写入文件'''</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">writeInfo</span><span class="params">(self,lst,url)</span>:</span></span><br><span class="line">        <span class="keyword">with</span> open(<span class="string">'imooc.txt'</span>,<span class="string">'a'</span>,encoding=<span class="string">'utf8'</span>) <span class="keyword">as</span> f:</span><br><span class="line">            f.write(url+ <span class="string">'\n'</span>)</span><br><span class="line">            <span class="keyword">for</span> item <span class="keyword">in</span> lst:</span><br><span class="line">                f.writelines(<span class="string">'课程:'</span> + item[<span class="string">'title'</span>][<span class="number">0</span>] + <span class="string">'\n'</span>)</span><br><span class="line">                f.writelines(<span class="string">'等级:'</span> + item[<span class="string">'grade'</span>][<span class="number">0</span>] + <span class="string">'\n'</span>)</span><br><span class="line">                f.writelines(<span class="string">'简介:'</span> + item[<span class="string">'remark'</span>][<span class="number">0</span>] + <span class="string">'\n'</span>)</span><br><span class="line">                f.writelines(<span class="string">'热度:'</span> + item[<span class="string">'user'</span>][<span class="number">0</span>] + <span class="string">'\n\n'</span>)</span><br><span class="line"></span><br><span class="line">    <span class="string">'''获取页面信息'''</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">getPages</span><span class="params">(self,url)</span>:</span></span><br><span class="line">        content = requests.get(url = url,headers = self.header)</span><br><span class="line">        selector = etree.HTML(content.text)</span><br><span class="line">        items = selector.xpath(<span class="string">'//*[@id="main"]/div[2]/div[2]/div[1]/div/div/a/div[2]'</span>)</span><br><span class="line">        lst = []</span><br><span class="line">        <span class="keyword">for</span> item <span class="keyword">in</span> items:</span><br><span class="line">            d = &#123;&#125;</span><br><span class="line">            d[<span class="string">'title'</span>] = [title <span class="keyword">for</span> title <span class="keyword">in</span> item.xpath(<span class="string">'h3/text()'</span>)]</span><br><span class="line">            d[<span class="string">'grade'</span>] = [grade <span class="keyword">for</span> grade <span class="keyword">in</span> item.xpath(<span class="string">'div/div[1]/span[1]/text()'</span>)]</span><br><span class="line">            d[<span class="string">'user'</span>] = [user <span class="keyword">for</span> user <span class="keyword">in</span> item.xpath(<span class="string">'div/div[1]/span[2]/text()'</span>)]</span><br><span class="line">            d[<span class="string">'remark'</span>] = [remark <span class="keyword">for</span> remark <span class="keyword">in</span> item.xpath(<span class="string">'div/p[1]/text()'</span>)]</span><br><span class="line">            lst.append(d)</span><br><span class="line">        print(lst)</span><br><span class="line">        self.writeInfo(lst,url)</span><br><span class="line"></span><br><span class="line">    <span class="string">'''对应页面换页'''</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">getNewUrl</span><span class="params">(self,url)</span>:</span></span><br><span class="line">        content = requests.get(url=url, headers=self.header)</span><br><span class="line">        selector = etree.HTML(content.text)</span><br><span class="line">        <span class="keyword">try</span>:</span><br><span class="line">            nums = selector.xpath(<span class="string">'//*[@id="main"]/div[2]/div[2]/div[2]/a/text()'</span>)</span><br><span class="line">            <span class="keyword">for</span> num <span class="keyword">in</span> nums:</span><br><span class="line">                <span class="keyword">if</span> num.isdigit() <span class="keyword">and</span> str(num) != <span class="string">'1'</span>:</span><br><span class="line">                    new_url = url + <span class="string">'&amp;page='</span> + str(num)</span><br><span class="line">                    self.getPages(new_url)</span><br><span class="line">        <span class="keyword">except</span> Exception <span class="keyword">as</span> e:</span><br><span class="line">            print(e)</span><br><span class="line"></span><br><span class="line">    <span class="string">'''主函数'''</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">main</span><span class="params">(self)</span>:</span></span><br><span class="line">        <span class="keyword">for</span> url <span class="keyword">in</span> self.getUrl():</span><br><span class="line">            print(url)</span><br><span class="line">            self.getPages(url)</span><br><span class="line">            self.getNewUrl(url)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">'__main__'</span>:</span><br><span class="line">    c = Course()</span><br><span class="line">    c.main()</span><br></pre></td></tr></table></figure>
 
       
@@ -570,8 +568,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -649,6 +656,22 @@
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#一、XPath用法"><span class="nav-number">1.</span> <span class="nav-text">一、XPath用法</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#二、慕课网免费课程爬虫分析"><span class="nav-number">2.</span> <span class="nav-text">二、慕课网免费课程爬虫分析</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#附"><span class="nav-number">2.1.</span> <span class="nav-text">附:</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
