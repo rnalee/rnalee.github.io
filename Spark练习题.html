@@ -1,0 +1,859 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon.ico?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="spark,python">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="摘要: Spark练习题…">
+<meta name="keywords" content="spark,python">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Spark练习题">
+<meta property="og:url" content="http://yoursite.com/Spark练习题.html">
+<meta property="og:site_name" content="李先生">
+<meta property="og:description" content="摘要: Spark练习题…">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://yoursite.com/Spark练习题/1.jpg">
+<meta property="og:image" content="http://yoursite.com/Spark练习题/2.jpg">
+<meta property="og:image" content="http://yoursite.com/Spark练习题/3.jpg">
+<meta property="og:image" content="http://yoursite.com/Spark练习题/4.jpg">
+<meta property="og:image" content="http://yoursite.com/Spark练习题/5.jpg">
+<meta property="og:image" content="http://yoursite.com/Spark练习题/6.jpg">
+<meta property="og:updated_time" content="2019-12-25T01:18:12.893Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Spark练习题">
+<meta name="twitter:description" content="摘要: Spark练习题…">
+<meta name="twitter:image" content="http://yoursite.com/Spark练习题/1.jpg">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":true,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/Spark练习题.html">
+
+
+
+
+
+
+  <script>
+  (function(i,s,o,g,r,a,m){i["DaoVoiceObject"]=r;i[r]=i[r]||function(){(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;a.charset="utf-8";m.parentNode.insertBefore(a,m)})(window,document,"script",('https:' == document.location.protocol ? 'https:' : 'http:') + "//widget.daovoice.io/widget/0f81ff2f.js","daovoice")
+  daovoice('init', {
+      app_id: "ee7581bd"
+    });
+  daovoice('update');
+  </script>
+
+  <title>Spark练习题 | 李先生</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+ 
+  
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">李先生</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">rnalee</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首&emsp;&emsp;页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
+            
+            关于博主
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标&emsp;&emsp;签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分&emsp;&emsp;类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归&emsp;&emsp;档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/Spark练习题.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="rnalee">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/uploads/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="李先生">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Spark练习题</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-12-25T08:51:18+08:00">
+                2019-12-25
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/spark/" itemprop="url" rel="index">
+                    <span itemprop="name">spark</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                  <span class="post-meta-divider">|</span>
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  2.5k 字
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  11 分钟
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>摘要: Spark练习题…</p>
+<a id="more"></a>
+<h4 id="一、问答题"><a href="#一、问答题" class="headerlink" title="一、问答题"></a>一、问答题</h4><p><strong>1、Spark 生态系统由哪几部分组成，各部分的功能是什么？</strong></p>
+<p>答：包括了：Spark Core、SparkSQL、Spark Streaming、MLlib、GraphX 五部分。各部分功能<br>如下：<br>（1）Spark Core：是 Spark 的内核，提供了 Spark 最基础与最核心的功能。<br>（2）SparkSQL：一种结构化的数据处理模块。它提供了一个称为 DataFrame 的编程抽象，<br>也可以作为分布式 SQL 查询引擎。<br>（3）Spark Streaming：一个高吞吐、高容错的实时流处理系统，可以处理实时数据流的数<br>据并进行容错。<br>（4）MLlib：Apache Spark 可扩展的机器学习库，提供了常见的机器学习的算法等。<br>（5）GraphX 是 Spark 中用于图和图并行计算。</p>
+<p><strong>2、Spark 的架构由哪几部分组成，各部分的作用是什么？</strong><br>（1）Driver App：客户端驱动程序，用于将任务转换为 RDD 和 DAG，并与 Cluster Manager<br>进行通信与调度。<br>（2）Cluster Manager ：Spark 的集群管理器。负责资源的分配与管理。<br>（3）Worker：Spark 的工作节点。负责创建 Executor，将资源和任务分配给 Executor，并同<br>步资源信息给 Cluster Manager。<br>（4）Executor：Spark 任务的执行单元。负责任务执行以及与 Worker、Driver App 的信息同<br>步。</p>
+<p><strong>3、RDD 的依赖分成哪两种，如何理解这两种依赖？</strong><br>答：RDD 的依赖分成分为：窄依赖和宽依赖两种。<br>（1）宽依赖：<br>指的一个父 RDD 的一个 Partition 会被多个子 RDD 的 Partition 所使用，关系是一对多，<br>这个过程会有 shuffle 的产生。<br>（2）窄依赖：<br>指的是每一个父 RDD 的 Partition 最多被子 RDD 的一个 Partition 使用，是一对一的关系，<br>这个过程没有 shuffle 产生。</p>
+<p><strong>4、spark 中，持久化方法 cache()和 persist()的区别是什么？</strong><br>答：<br>cache()： 缓存数据，默认是缓存在内存中，其本质还是调用 persist()方法。<br>persist()：缓存数据，有丰富的数据缓存策略。数据可以保存在内存也可以保存在磁盘，使<br>用的时候指定对应的缓存级别即可。</p>
+<p><strong>5、Spark 目前支持几种分布式部署方式？每种模式特点是什么？</strong><br>答：<br>（1）本地模式。特点：用单机的多个线程来模拟 Spark 分布式计算,运行在本地,便于调试。<br>（2）Standalone 模式。特点：由 Master+Slave 构成的 Spark 集群，分为伪分布或全分布，<br>不需要有依赖资源管理。<br>（3）Spark on YARN 模式。运行在 YARN 资源管理器框架之上，由 YARN 负责资源管理，Spark<br>负责任务调度和计算。<br>（4）Spark On Mesos 模式。运行在 Apache Mesos 资源管理器框架之上，由 Mesos 负责资<br>源管理，Spark 负责任务调度和计算。</p>
+<p><strong>6、RDD 的五个特性是什么？</strong><br>答：<br>(1)一个分区列表。RDD 中的数据都存储在一个分区列表中。<br>(2) 由一个函数计算每一个分片。RDD 的计算以分片为单位。<br>(3) RDD 之间的依赖关系。RDD 每一次转换都生成一个新的 RDD，多个 RDD 之间有前后依赖<br>关系。<br>(4)Partitioner 是 RDD 中的分区函数。数据按一定规则分配到指定的 Partitioner 上去处理。<br>(5)最佳位置列表。Spark 在进行任务调度时，会尽量将任务分配给处理数据块的存储位置。</p>
+<p><strong>7、简述 Spark 工作机制？</strong><br>答：<br>用户向客户端提交作业后，<br>（1）客户端初始化 SparkContext，此时，会创建 DAGScheduler 和 TaskScheduler。<br>（2）SparkContext 向资源管理器申请运行 Executor 的资源。<br>（3）Executor 启动，启动完成后向 SparkContext 注册，并申请 Task。<br>（4）每次执行到一个 Action 算子，就会创建一个 Job，同时 Job 会被提交到 DAGScheduler。<br>（5）RDD 之间的依赖关系形成有向无环图 DAG。DAGScheduler 将 DAG 分解成 Stage，然后<br>每个 Stage 创建一个 Task 集合，并发送给 TaskScheduler。TaskScheduler 将 Task 分发到 Executor<br>执行。<br>（6）Task 在 Executor 运行，运行完释放资源。</p>
+<p><strong>8、SparkSQL 支持加载哪些格式的数据源，请列出至少 5 种。</strong><br>答：<br>（1）csv             （5）hive table<br>（2）json             （6）text<br>（3）parquet         （7）avro<br>（4）jdbc</p>
+<h4 id="二、编程题"><a href="#二、编程题" class="headerlink" title="二、编程题"></a>二、编程题</h4><p>1 、 某 搜 索 引 擎 网 站 ， 将 用 户 搜 索 的 单 词 记 录 到 HDFS 文 件 上 ， 路 径 为<br>hdfs://10.10.10.10/data.csv，文件为 csv 格式文件。每行的数据包含 4 个字段“日期、搜索词、<br>用户、来源”，各字段之间以逗号（,）分割。示例数据如下左表：</p>
+<img src="/Spark练习题/1.jpg">
+<p>请使用 Spark RDD 对每天搜索词的数量进行统计，统计后的结果分 3 个字段“日期，单词，<br>次数”，且对统计结果的排序不作要求，示例数据如上右表。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> pyspark.shell <span class="keyword">import</span> sc,spark</span><br><span class="line"><span class="keyword">from</span> pyspark.sql.types <span class="keyword">import</span> *</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">inputFile = <span class="string">"hdfs://10.10.10.10/data.csv"</span></span><br><span class="line">rdd1 = sc.textFile(inputFile)</span><br><span class="line">rdd2 = rdd1.map(<span class="keyword">lambda</span> x:x.split(<span class="string">","</span>))</span><br><span class="line">rdd3 = rdd2.map(<span class="keyword">lambda</span> x:(x[<span class="number">0</span>]+<span class="string">","</span>+x[<span class="number">1</span>],<span class="number">1</span>))</span><br><span class="line">rdd4 = rdd3.reduceByKey(<span class="keyword">lambda</span> x,y:x+y)</span><br><span class="line">print(rdd4.collect())</span><br></pre></td></tr></table></figure>
+<p>2、以上一道题目的 csv 数据为基础，将数据加载成 DataFrame，并实现同样的功能。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> pyspark.shell <span class="keyword">import</span> sc,spark</span><br><span class="line"><span class="keyword">from</span> pyspark.sql.types <span class="keyword">import</span> *</span><br><span class="line"></span><br><span class="line">inputFile = <span class="string">"hdfs://10.10.10.10/data.csv"</span></span><br><span class="line">rdd1 = sc.textFile(inputFile)</span><br><span class="line">rdd2 = rdd1.map(<span class="keyword">lambda</span> x:x.split(<span class="string">","</span>))</span><br><span class="line">rdd3 = rdd2.map(<span class="keyword">lambda</span> x:(x[<span class="number">0</span>],x[<span class="number">1</span>],x[<span class="number">2</span>],x[<span class="number">3</span>]))</span><br><span class="line">df = rdd3.toDF(<span class="string">"date:string,searchKey:string,userId:string,source:string"</span>)</span><br><span class="line">df.registerTempTable(<span class="string">"result"</span>)</span><br><span class="line">spark.sql(<span class="string">"select date,searchKey,count(searchKey) from result group by date,searchKey"</span>).show()</span><br></pre></td></tr></table></figure>
+<p>3、目前有某省各市近 10 年的玉米每天原粮收购价的数据，数据保存到 HDFS，路径是：<br>hdfs://10.10.10.10/data03.txt，文件为 csv 格式文件，每行的数据分为 3 列包含“日期、地区、<br>价格”，价格的值是整数，单位是元/吨，示例数据如下：</p>
+<img src="/Spark练习题/2.jpg">
+<p>请使用 Spark RDD 求出该省每年玉米的最高价格和最低价格。输出的实例的数据如右上：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> pyspark.shell <span class="keyword">import</span> sc,spark</span><br><span class="line"><span class="keyword">from</span> pyspark.sql.types <span class="keyword">import</span> *</span><br><span class="line"></span><br><span class="line">inputFile = <span class="string">"/home/lee/resource_exam/data03.txt"</span></span><br><span class="line">rdd1 = sc.textFile(inputFile)</span><br><span class="line">rdd2 = rdd1.map(<span class="keyword">lambda</span> x:x.split(<span class="string">","</span>))</span><br><span class="line">rdd3 = rdd2.map(<span class="keyword">lambda</span> x:(x[<span class="number">0</span>].split(<span class="string">"-"</span>)[<span class="number">0</span>],int(x[<span class="number">2</span>])))</span><br><span class="line">rdd4 = rdd3.groupByKey().mapValues(list)</span><br><span class="line">rdd5 = rdd4.mapValues(<span class="keyword">lambda</span> x:(max(x),min(x)))</span><br><span class="line">rdd6 = rdd5.map(<span class="keyword">lambda</span> x:(x[<span class="number">0</span>],x[<span class="number">1</span>][<span class="number">0</span>],x[<span class="number">1</span>][<span class="number">1</span>]))</span><br><span class="line">print(rdd6.collect())</span><br></pre></td></tr></table></figure>
+<p>4、以上一道题目的 csv 数据为基础，将数据加载成 DataFrame，并实现同样的功能。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> pyspark.shell <span class="keyword">import</span> sc,spark</span><br><span class="line"><span class="keyword">from</span> pyspark.sql.types <span class="keyword">import</span> *</span><br><span class="line"></span><br><span class="line">inputFile = <span class="string">"/home/lee/resource_exam/data03.txt"</span></span><br><span class="line">rdd1 = sc.textFile(inputFile)</span><br><span class="line">rdd2 = rdd1.map(<span class="keyword">lambda</span> x:x.split(<span class="string">","</span>))</span><br><span class="line">rdd3 = rdd2.map(<span class="keyword">lambda</span> x:(x[<span class="number">0</span>].split(<span class="string">"-"</span>)[<span class="number">0</span>],x[<span class="number">1</span>],int(x[<span class="number">2</span>])))</span><br><span class="line">df = rdd3.toDF(<span class="string">"year:string,region:string,price:int"</span>)</span><br><span class="line">df.registerTempTable(<span class="string">"result"</span>)</span><br><span class="line">spark.sql(<span class="string">"select year,max(price),min(price) from result group by year"</span>).show()</span><br></pre></td></tr></table></figure>
+<p>5、目 前 有 某 个 大 型 停 车 场 的 车 辆 出 入 数 据 ， 数 据 保 存 到 HDFS ， 路 径 是 ：<br>hdfs://10.10.10.10/data05.txt，文件为 csv 格式文件，每行的数据分为 4 列包含“拍摄时间，卡<br>口 ID，摄像头编号，车牌号”，示例数据如下：</p>
+<img src="/Spark练习题/3.jpg">
+<p>请使用 Spark RDD 求出所有数据中心，进出次数最多的车牌号。输出的示例数据如上右：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> pyspark.shell <span class="keyword">import</span> sc,spark</span><br><span class="line"><span class="keyword">from</span> pyspark.sql.types <span class="keyword">import</span> *</span><br><span class="line"></span><br><span class="line">inputFile = <span class="string">"hdfs://10.10.10.10/data05.txt"</span></span><br><span class="line">rdd1 = sc.textFile(inputFile)</span><br><span class="line">rdd2 = rdd1.map(<span class="keyword">lambda</span> x:x.split(<span class="string">","</span>))</span><br><span class="line">rdd3 = rdd2.map(<span class="keyword">lambda</span> x:(x[<span class="number">3</span>],<span class="number">1</span>))</span><br><span class="line">rdd4 = rdd3.reduceByKey(<span class="keyword">lambda</span> x,y:x+y)</span><br><span class="line">rdd5 = rdd4.sortBy(<span class="keyword">lambda</span> x:x[<span class="number">1</span>],ascending = <span class="literal">False</span>)</span><br><span class="line">print(rdd5.take(<span class="number">1</span>))</span><br></pre></td></tr></table></figure>
+<p>6、以上一道题目的 csv 数据为基础，将数据加载成 DataFrame，并实现同样的功能。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> pyspark.shell <span class="keyword">import</span> sc,spark</span><br><span class="line"><span class="keyword">from</span> pyspark.sql.types <span class="keyword">import</span> *</span><br><span class="line"></span><br><span class="line">inputFile = <span class="string">"hdfs://10.10.10.10/data05.txt"</span></span><br><span class="line">rdd1 = sc.textFile(inputFile)</span><br><span class="line">rdd2 = rdd1.map(<span class="keyword">lambda</span> x:x.split(<span class="string">","</span>))</span><br><span class="line">rdd3 = rdd2.map(<span class="keyword">lambda</span> x:(x[<span class="number">0</span>],x[<span class="number">1</span>],x[<span class="number">2</span>],x[<span class="number">3</span>]))</span><br><span class="line">df = rdd3.toDF(<span class="string">"datetime:string,doorId:string,cameraId:string,carNumber:string"</span>)</span><br><span class="line">df.registerTempTable(<span class="string">"result"</span>)</span><br><span class="line">spark.sql(<span class="string">"select carNumber,count(carNumber) from result group by carNumber order by count(carNumber) desc"</span>).show(<span class="number">1</span>)</span><br></pre></td></tr></table></figure>
+<p>7、目前有豆瓣电影的评分数据，数据保存到 HDFS，路径是：hdfs://10.10.10.10/data07.txt，<br>文件为 csv 格式文件，每行的数据分为 3 列包含“评分人 ID，电影名，评分”，列之间用逗<br>号（,）分隔，评分是一个浮点数，示例数据如下：</p>
+<img src="/Spark练习题/4.jpg">
+<p>请使用 Spark RDD 求出平均评分最高的电影的前 3 名，并显示电影名称，平均评分。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> pyspark.shell <span class="keyword">import</span> sc,spark</span><br><span class="line"><span class="keyword">from</span> pyspark.sql.types <span class="keyword">import</span> *</span><br><span class="line"></span><br><span class="line">inputFile = <span class="string">"hdfs://10.10.10.10/data07.txt"</span></span><br><span class="line">rdd1 = sc.textFile(inputFile)</span><br><span class="line">rdd2 = rdd1.map(<span class="keyword">lambda</span> x:x.split(<span class="string">","</span>))</span><br><span class="line">rdd3 = rdd2.map(<span class="keyword">lambda</span> x:(x[<span class="number">1</span>],float(x[<span class="number">2</span>])))</span><br><span class="line">rdd4 = rdd3.groupByKey().mapValues(list)</span><br><span class="line">rdd5 = rdd4.mapValues(<span class="keyword">lambda</span> x:sum(x)/len(x))</span><br><span class="line">rdd6 = rdd5.sortBy(<span class="keyword">lambda</span> x:x[<span class="number">1</span>],ascending = <span class="literal">False</span>)</span><br><span class="line">print(rdd6.take(<span class="number">3</span>))</span><br></pre></td></tr></table></figure>
+<p>8、以上一道题目的 csv 数据为基础，将数据加载成 DataFrame，并实现同样的功能。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> pyspark.shell <span class="keyword">import</span> sc,spark</span><br><span class="line"><span class="keyword">from</span> pyspark.sql.types <span class="keyword">import</span> *</span><br><span class="line"></span><br><span class="line">inputFile = <span class="string">"hdfs://10.10.10.10/data07.txt"</span></span><br><span class="line">rdd1 = sc.textFile(inputFile)</span><br><span class="line">rdd2 = rdd1.map(<span class="keyword">lambda</span> x:x.split(<span class="string">","</span>))</span><br><span class="line">rdd3 = rdd2.map(<span class="keyword">lambda</span> x:(x[<span class="number">0</span>],x[<span class="number">1</span>],float(x[<span class="number">2</span>])))</span><br><span class="line">df = rdd3.toDF(<span class="string">"userId:string,filmName:string,point:float"</span>)</span><br><span class="line">df.registerTempTable(<span class="string">"result"</span>)</span><br><span class="line">spark.sql(<span class="string">"select filmName,avg(point) from result group by filmName order by avg(point) desc"</span>).show(<span class="number">3</span>)</span><br></pre></td></tr></table></figure>
+<p>9、网络上每天都会产生大量的文本数据，而大规模舆情系统基本原理是从网络中爬取相关<br>数据，比如评论，并进行分词后保存起来。加入这些数据保存到 HDFS，路径是：<br>hdfs://10.10.10.10/data09.txt，文件为 csv 格式文件，每行的数据分为 3 列包含“日期时间，来<br>源，单词”，列之间用逗号（,）分隔，日期时间中间有个空格，示例数据如下：</p>
+<img src="/Spark练习题/5.jpg">
+<p>请使用 Spark RDD 求出 2019 年热度数排在前十名的热词（每一行记录表示该词的一个热度<br>数）。输出的数据示例如下：<br><img src="/Spark练习题/6.jpg"></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> pyspark.shell <span class="keyword">import</span> sc,spark</span><br><span class="line"><span class="keyword">from</span> pyspark.sql.types <span class="keyword">import</span> *</span><br><span class="line"></span><br><span class="line">inputFile = <span class="string">"hdfs://10.10.10.10/data09.txt"</span></span><br><span class="line">rdd1 = sc.textFile(inputFile)</span><br><span class="line">rdd2 = rdd1.map(<span class="keyword">lambda</span> x:x.split(<span class="string">","</span>))</span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">f</span><span class="params">(x)</span>:</span></span><br><span class="line">    <span class="keyword">if</span> x[<span class="number">0</span>].split(<span class="string">"-"</span>)[<span class="number">0</span>] == <span class="string">"2019"</span>:</span><br><span class="line">        <span class="keyword">return</span> x</span><br><span class="line">rdd3 = rdd2.filter(f)</span><br><span class="line">rdd4 = rdd3.map(<span class="keyword">lambda</span> x:(x[<span class="number">2</span>],<span class="number">1</span>))</span><br><span class="line">rdd5 = rdd4.reduceByKey(<span class="keyword">lambda</span> x,y:x+y)</span><br><span class="line">rdd6 = rdd5.sortBy(<span class="keyword">lambda</span> x:x[<span class="number">1</span>],ascending = <span class="literal">False</span>)</span><br><span class="line">print(rdd6.take(<span class="number">10</span>))</span><br></pre></td></tr></table></figure>
+<p>10、以上一道题目的 csv 数据为基础，将数据加载成 DataFrame，并实现同样的功能。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> pyspark.shell <span class="keyword">import</span> sc,spark</span><br><span class="line"><span class="keyword">from</span> pyspark.sql.types <span class="keyword">import</span> *</span><br><span class="line"></span><br><span class="line">inputFile = <span class="string">"hdfs://10.10.10.10/data09.txt"</span></span><br><span class="line">rdd1 = sc.textFile(inputFile)</span><br><span class="line">rdd2 = rdd1.map(<span class="keyword">lambda</span> x:x.split(<span class="string">","</span>))</span><br><span class="line">rdd3 = rdd2.map(<span class="keyword">lambda</span> x:(x[<span class="number">0</span>].split(<span class="string">"-"</span>)[<span class="number">0</span>],x[<span class="number">1</span>],x[<span class="number">2</span>]))</span><br><span class="line">df = rdd3.toDF(<span class="string">"year:string,source:string,word:string"</span>)</span><br><span class="line">df.registerTempTable(<span class="string">"result"</span>)</span><br><span class="line">spark.sql(<span class="string">"select word,count(word) from result where year = 2019 group by word order by count(word) desc"</span>).show(<span class="number">10</span>)</span><br></pre></td></tr></table></figure>
+<h5 id="附：数据源"><a href="#附：数据源" class="headerlink" title="附：数据源"></a>附：数据源</h5><p><a href="https://pan.baidu.com/s/1uk7NTmyKnoUetQs6DjkkoA" target="_blank" rel="noopener">https://pan.baidu.com/s/1uk7NTmyKnoUetQs6DjkkoA</a></p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/spark/" rel="tag"><i class="fa fa-tag"></i> spark</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/浅谈http-https及websocket.html" rel="next" title="浅谈http,https及websocket">
+                <i class="fa fa-chevron-left"></i> 浅谈http,https及websocket
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/uploads/avatar.jpg" alt="rnalee">
+            
+              <p class="site-author-name" itemprop="name">rnalee</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">14</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">6</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">6</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/rnalee" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:1695219395@qq.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#一、问答题"><span class="nav-number">1.</span> <span class="nav-text">一、问答题</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#二、编程题"><span class="nav-number">2.</span> <span class="nav-text">二、编程题</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#附：数据源"><span class="nav-number">2.1.</span> <span class="nav-text">附：数据源</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">rnalee</span>
+
+  
+</div>
+
+
+  <!--<div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a> v5.1.4</div>-->
+
+
+
+
+
+
+
+<script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<span id="busuanzi_container_site_pv">访问量:<span id="busuanzi_value_site_pv"></span>次</span>
+<span class="post-meta-divider">|</span>
+<span id="busuanzi_container_site_uv">访客数:<span id="busuanzi_value_site_uv"></span>人</span>
+<span class="post-meta-divider">|</span>
+ 
+
+
+<div class="theme-info">
+  <div class="powered-by"></div>
+  <span class="post-count">博客全站共20.5k字</span>
+</div>
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+          <span id="scrollpercent"><span>0</span>%</span>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
