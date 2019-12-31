@@ -2,6 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://yoursite.com/python%E7%9F%A5%E8%AF%86%E7%82%B9.html</loc>
+    
+    <lastmod>2019-12-31T01:49:40.139Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>http://yoursite.com/%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F.html</loc>
     
     <lastmod>2019-12-26T09:01:09.268Z</lastmod>
