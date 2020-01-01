@@ -93,7 +93,7 @@
 <meta property="og:image" content="http://yoursite.com/浅谈http-https及websocket/4.png">
 <meta property="og:image" content="http://yoursite.com/浅谈http-https及websocket/5.jpg">
 <meta property="og:image" content="http://yoursite.com/浅谈http-https及websocket/6.png">
-<meta property="og:updated_time" content="2019-12-24T07:58:14.405Z">
+<meta property="og:updated_time" content="2020-01-01T07:32:07.546Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="浅谈http,https及websocket">
 <meta name="twitter:description" content="摘要：为了数据能够在庞杂的网络中能够正确，迅速的传递给目标主机。我们定义了许多的网络协议，也就是网络传输数据的规则，来实现网络的连接。而这些协议中，我们使用的最多的，基本上就是http或https协议。">
@@ -366,7 +366,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  4k 字
+                  4.1k 字
                 </span>
               
 
@@ -757,7 +757,6 @@
 </tr>
 </tbody>
 </table>
-<p>###### </p>
 <h6 id="6、缺点"><a href="#6、缺点" class="headerlink" title="6、缺点"></a>6、缺点</h6><p>HTTP协议最大的缺点就是明文传输，而在网络上数据传输的路径上有很大一部分都是暴露在公有环境下的，所以数据是很容易泄露。</p>
 <h4 id="二、HTTPS"><a href="#二、HTTPS" class="headerlink" title="二、HTTPS"></a>二、HTTPS</h4><h6 id="1、简介"><a href="#1、简介" class="headerlink" title="1、简介"></a>1、简介</h6><p>HTTPS （全称：Hyper Text Transfer Protocol over SecureSocket Layer），超文本传输安全协议，是以安全为目标的 HTTP 通道，在HTTP的基础上通过传输加密和身份认证保证了传输过程的安全性  。HTTPS 在HTTP 的基础下加入SSL层或者TSL。</p>
 <p>在HTTPS请求发起之前，客户端会首先向服务端发起请求，获取证书。HTTPS传输的数据是经过证书加密以后的数据，这就避免了数据泄露的风险。</p>
@@ -795,7 +794,10 @@
 <p>锚部分是用来定位到页面中某个元素的。</p>
 </li>
 </ol>
-<h4 id="五、cookie和session的区别"><a href="#五、cookie和session的区别" class="headerlink" title="五、cookie和session的区别"></a>五、cookie和session的区别</h4><p>1、cookie存储在客户端浏览器上，不占用服务器资源；而session存储在服务器上，每个用户都会产生一个session，耗费服务器内存。</p>
+<h4 id="五、cookie和session的区别"><a href="#五、cookie和session的区别" class="headerlink" title="五、cookie和session的区别"></a>五、cookie和session的区别</h4><p>【相同点】：</p>
+<p>session和cookie都可以实现临时存储用户信息的功能，存储的目的也都是为了实现两个http请求之间的数据共享。</p>
+<p>【不同点】：</p>
+<p>1、cookie存储在客户端浏览器上，不占用服务器资源；而session存储在服务器上，每个用户都会产生一个session，耗费服务器内存。</p>
 <p>2、cookie的生命周期可以由开发者设置；而session只要浏览器关闭则会失效。</p>
 <p>3、cookie支持跨域名访问；而session不支持跨域名访问。</p>
 <p>4、一个cookie保存的数据小于等于4KB，一个站点最多保存20个Cookie；而session则没有限制。</p>
@@ -1012,7 +1014,7 @@
 
     <footer id="footer" class="footer">
       <div class="footer-inner">
-        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+        <div class="copyright">&copy; 2019 &mdash; <span itemprop="copyrightYear">2020</span>
   <span class="with-love">
     <i class="fa fa-user"></i>
   </span>
