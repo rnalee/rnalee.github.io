@@ -1,0 +1,944 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon.ico?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="hadoop,java">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="摘要：HDFS是Hadoop平台的核心组成之一，其访问方式有多种，可通过Web、Shell或者API访问，本文介绍的是Shell方式…">
+<meta name="keywords" content="hadoop,java">
+<meta property="og:type" content="article">
+<meta property="og:title" content="HDFS">
+<meta property="og:url" content="http://yoursite.com/HDFS.html">
+<meta property="og:site_name" content="李先生">
+<meta property="og:description" content="摘要：HDFS是Hadoop平台的核心组成之一，其访问方式有多种，可通过Web、Shell或者API访问，本文介绍的是Shell方式…">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://yoursite.com/HDFS/1.jpg">
+<meta property="og:image" content="http://yoursite.com/HDFS/2.jpg">
+<meta property="og:image" content="http://yoursite.com/HDFS/3.jpg">
+<meta property="og:image" content="http://yoursite.com/HDFS/4.jpg">
+<meta property="og:image" content="http://yoursite.com/HDFS/5.jpg">
+<meta property="og:image" content="http://yoursite.com/HDFS/6.jpg">
+<meta property="og:image" content="http://yoursite.com/HDFS/7.jpg">
+<meta property="og:image" content="http://yoursite.com/HDFS/8.jpg">
+<meta property="og:image" content="http://yoursite.com/HDFS/9.jpg">
+<meta property="og:image" content="http://yoursite.com/HDFS/10.jpg">
+<meta property="og:image" content="http://yoursite.com/HDFS/11.jpg">
+<meta property="og:image" content="http://yoursite.com/HDFS/12.jpg">
+<meta property="og:image" content="http://yoursite.com/HDFS/13.jpg">
+<meta property="og:image" content="http://yoursite.com/HDFS/14.jpg">
+<meta property="og:image" content="http://yoursite.com/HDFS/15.jpg">
+<meta property="og:image" content="http://yoursite.com/HDFS/16.jpg">
+<meta property="og:image" content="http://yoursite.com/HDFS/17.jpg">
+<meta property="og:image" content="http://yoursite.com/HDFS/18.jpg">
+<meta property="og:image" content="http://yoursite.com/HDFS/19.jpg">
+<meta property="og:image" content="http://yoursite.com/HDFS/20.jpg">
+<meta property="og:image" content="http://yoursite.com/HDFS/21.jpg">
+<meta property="og:image" content="http://yoursite.com/HDFS/22.jpg">
+<meta property="og:image" content="http://yoursite.com/HDFS/23.jpg">
+<meta property="og:image" content="http://yoursite.com/HDFS/24.jpg">
+<meta property="og:image" content="http://yoursite.com/HDFS/25.jpg">
+<meta property="og:updated_time" content="2020-01-02T01:53:54.545Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="HDFS">
+<meta name="twitter:description" content="摘要：HDFS是Hadoop平台的核心组成之一，其访问方式有多种，可通过Web、Shell或者API访问，本文介绍的是Shell方式…">
+<meta name="twitter:image" content="http://yoursite.com/HDFS/1.jpg">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":true,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/HDFS.html">
+
+
+
+
+
+
+  <script>
+  (function(i,s,o,g,r,a,m){i["DaoVoiceObject"]=r;i[r]=i[r]||function(){(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;a.charset="utf-8";m.parentNode.insertBefore(a,m)})(window,document,"script",('https:' == document.location.protocol ? 'https:' : 'http:') + "//widget.daovoice.io/widget/0f81ff2f.js","daovoice")
+  daovoice('init', {
+      app_id: "ee7581bd"
+    });
+  daovoice('update');
+  </script>
+
+  <title>HDFS | 李先生</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+ 
+  
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">李先生</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">rnalee</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首&emsp;&emsp;页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
+            
+            关于博主
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标&emsp;&emsp;签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分&emsp;&emsp;类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归&emsp;&emsp;档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/HDFS.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="rnalee">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/uploads/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="李先生">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">HDFS</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-01-02T08:44:27+08:00">
+                2020-01-02
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/hadoop-java/" itemprop="url" rel="index">
+                    <span itemprop="name">hadoop,java</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                  <span class="post-meta-divider">|</span>
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  1.6k 字
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  6 分钟
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>摘要：HDFS是Hadoop平台的核心组成之一，其访问方式有多种，可通过Web、Shell或者API访问，本文介绍的是Shell方式…</p>
+<a id="more"></a>
+<p><strong>Shell方式分为以下几类：</strong></p>
+<img src="/HDFS/1.jpg">
+<h4 id="下面将通过例子来演示hdfs操作命令（可以在终端输入-hdfs-dfs-help-查询命令用法）。"><a href="#下面将通过例子来演示hdfs操作命令（可以在终端输入-hdfs-dfs-help-查询命令用法）。" class="headerlink" title="下面将通过例子来演示hdfs操作命令（可以在终端输入 hdfs dfs -help 查询命令用法）。"></a>下面将通过例子来演示hdfs操作命令（可以在终端输入 hdfs dfs -help 查询命令用法）。</h4><p>先通过vi在本地创建三个文本文件：txt1.txt、txt2.txt、txt3.txt。文件文件里面随意输入些内容。</p>
+<h6 id="1-列出子目录或子文件列出HDFS当前用户家目录下的文件及文件夹-前提：家目录已经存在，否则报错"><a href="#1-列出子目录或子文件列出HDFS当前用户家目录下的文件及文件夹-前提：家目录已经存在，否则报错" class="headerlink" title="(1) 列出子目录或子文件列出HDFS当前用户家目录下的文件及文件夹(前提：家目录已经存在，否则报错)"></a>(1) 列出子目录或子文件列出HDFS当前用户家目录下的文件及文件夹(前提：家目录已经存在，否则报错)</h6><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hdfs dfs -ls</span><br></pre></td></tr></table></figure>
+<p>列出根目录</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hdfs dfs -ls /</span><br></pre></td></tr></table></figure>
+<h6 id="2-创建目录-p表示父目录都会创建"><a href="#2-创建目录-p表示父目录都会创建" class="headerlink" title="(2) 创建目录(-p表示父目录都会创建)"></a>(2) 创建目录(-p表示父目录都会创建)</h6><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">hdfs dfs -mkdir /mydemo2 </span><br><span class="line"></span><br><span class="line">hdfs dfs -mkdir -p /mydemo/x/y/z</span><br><span class="line"></span><br><span class="line">hdfs dfs -mkdir /mydemo3 /mydemo4 /mydemo5</span><br></pre></td></tr></table></figure>
+<h6 id="3-列出HDFS文件下名为-mydemo的文件夹中的文件-R表示列出所有子目录"><a href="#3-列出HDFS文件下名为-mydemo的文件夹中的文件-R表示列出所有子目录" class="headerlink" title="(3) 列出HDFS文件下名为/mydemo的文件夹中的文件(-R表示列出所有子目录)"></a>(3) 列出HDFS文件下名为/mydemo的文件夹中的文件(-R表示列出所有子目录)</h6><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">hdfs dfs -ls /mydemo</span><br><span class="line"></span><br><span class="line">hdfs dfs -ls -R /mydemo</span><br></pre></td></tr></table></figure>
+<h6 id="4-上传文件"><a href="#4-上传文件" class="headerlink" title="(4) 上传文件"></a>(4) 上传文件</h6><p>将本地目录txt1.txt文件上传到HDFS上并重命名为hdfs1.txt：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">hdfs dfs -put txt1.txt /mydemo/hdfs1.txt </span><br><span class="line"></span><br><span class="line">hdfs dfs -copyFromLocal txt2.txt /mydemo/hdfs2.txt</span><br></pre></td></tr></table></figure>
+<h6 id="5-本地文件移动到HDFS"><a href="#5-本地文件移动到HDFS" class="headerlink" title="(5)本地文件移动到HDFS"></a>(5)本地文件移动到HDFS</h6><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hdfs dfs -moveFromLocal txt3.txt /mydemo/hdfs3.txt</span><br></pre></td></tr></table></figure>
+<h6 id="6-下载文件"><a href="#6-下载文件" class="headerlink" title="(6)下载文件"></a>(6)下载文件</h6><p>将HDFS中的file2文件复制到本地系统并命名为txt3.txt：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">hdfs dfs -get /mydemo/hdfs1.txt   txt11.txt </span><br><span class="line"></span><br><span class="line">hdfs dfs -copyToLocal /mydemo/hdfs3.txt  txt3.txt</span><br></pre></td></tr></table></figure>
+<h6 id="7-查看文件"><a href="#7-查看文件" class="headerlink" title="(7)查看文件"></a>(7)查看文件</h6><p>查看HDFS下/mydemo/hdfs2.txt文件中的内容：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">hdfs dfs -cat /mydemo/hdfs2.txt </span><br><span class="line"></span><br><span class="line">hdfs dfs -text /mydemo/hdfs2.txt</span><br></pre></td></tr></table></figure>
+<h6 id="8-删除文档"><a href="#8-删除文档" class="headerlink" title="(8) 删除文档"></a>(8) 删除文档</h6><p>删除HDFS下名为file1的文件（参数r为递归删除）</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hdfs dfs -rm -r /mydemo/hdfs3.txt</span><br></pre></td></tr></table></figure>
+<h6 id="9-文件或文件夹复制"><a href="#9-文件或文件夹复制" class="headerlink" title="(9)文件或文件夹复制"></a>(9)文件或文件夹复制</h6><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hdfs dfs -cp   /mydemo/hdfs1.txt /mydemo/hdfs3.txt</span><br></pre></td></tr></table></figure>
+<h6 id="10-文件或文件夹的移动"><a href="#10-文件或文件夹的移动" class="headerlink" title="(10)文件或文件夹的移动"></a>(10)文件或文件夹的移动</h6><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hdfs dfs -mv   /mydemo/hdfs3.txt /mydemo/hdfs4.txt</span><br></pre></td></tr></table></figure>
+<h6 id="11-追加到文件末尾的指令"><a href="#11-追加到文件末尾的指令" class="headerlink" title="(11)追加到文件末尾的指令"></a>(11)追加到文件末尾的指令</h6><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hdfs dfs -appendToFile txt1.txt /mydemo/hdfs5.txt</span><br></pre></td></tr></table></figure>
+<h6 id="12-文件合并再下载"><a href="#12-文件合并再下载" class="headerlink" title="(12) 文件合并再下载"></a>(12) 文件合并再下载</h6><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hdfs dfs -getmerge /mydemo merge.txt</span><br></pre></td></tr></table></figure>
+<h6 id="13-count统计（显示：目录个数，-文件个数，-文件总计大小-输入路径）"><a href="#13-count统计（显示：目录个数，-文件个数，-文件总计大小-输入路径）" class="headerlink" title="(13) count统计（显示：目录个数， 文件个数， 文件总计大小 输入路径）"></a>(13) count统计（显示：目录个数， 文件个数， 文件总计大小 输入路径）</h6><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hdfs dfs -count /mydemo</span><br></pre></td></tr></table></figure>
+<h6 id="14-查看文件大小"><a href="#14-查看文件大小" class="headerlink" title="(14) 查看文件大小"></a>(14) 查看文件大小</h6><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hdfs dfs -du /mydemo</span><br></pre></td></tr></table></figure>
+<h6 id="15-设置扩展属性，获取扩展属性"><a href="#15-设置扩展属性，获取扩展属性" class="headerlink" title="(15) 设置扩展属性，获取扩展属性"></a>(15) 设置扩展属性，获取扩展属性</h6><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">hdfs dfs -setfattr -n user.from -v http://www.baidu.com /mydemo/hdfs1.txt </span><br><span class="line"></span><br><span class="line">hdfs dfs -getfattr -d /mydemo/hdfs1.txt</span><br></pre></td></tr></table></figure>
+<p>###### </p>
+<h4 id="下面将通过例子来演示hdfs管理命令（可以在终端输入-hdfs-dfsadmin-help-查询命令用法）。"><a href="#下面将通过例子来演示hdfs管理命令（可以在终端输入-hdfs-dfsadmin-help-查询命令用法）。" class="headerlink" title="下面将通过例子来演示hdfs管理命令（可以在终端输入 hdfs dfsadmin -help 查询命令用法）。"></a>下面将通过例子来演示hdfs管理命令（可以在终端输入 hdfs dfsadmin -help 查询命令用法）。</h4><h6 id="1-安全模式相关"><a href="#1-安全模式相关" class="headerlink" title="(1) 安全模式相关"></a>(1) 安全模式相关</h6><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">hdfs dfsadmin -safemode get </span><br><span class="line">hdfs dfsadmin -safemode enter </span><br><span class="line">hdfs dfsadmin -safemode leave </span><br><span class="line">hdfs dfsadmin -safemode wait</span><br></pre></td></tr></table></figure>
+<h6 id="2-快照开启或禁用快照功能"><a href="#2-快照开启或禁用快照功能" class="headerlink" title="(2) 快照开启或禁用快照功能"></a>(2) 快照开启或禁用快照功能</h6><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">hdfs dfsadmin -allowSnapshot &lt;snapshotDir&gt; </span><br><span class="line">hdfs dfsadmin -disallowSnapshot &lt;snapshotDir&gt;</span><br><span class="line"></span><br><span class="line">例如：</span><br><span class="line">hdfs dfsadmin -allowSnapshot /mydemo </span><br><span class="line">hdfs dfsadmin -disallowSnapshot /mydemo2</span><br></pre></td></tr></table></figure>
+<p>创建快照、删除快照、重命名快照的命令如下：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">hdfs dfs -createSnapshot &lt;snapshotDir&gt; [&lt;snapshotName&gt;] </span><br><span class="line">hdfs dfs -deleteSnapshot &lt;snapshotDir&gt; &lt;snapshotName&gt; </span><br><span class="line">hdfs dfs -renameSnapshot &lt;snapshotDir&gt; &lt;oldName&gt; &lt;newName&gt;</span><br><span class="line"></span><br><span class="line">例如：</span><br><span class="line">hdfs dfs -createSnapshot /mydemo s1 </span><br><span class="line">hdfs dfs -renameSnapshot /mydemo s1 s2 </span><br><span class="line">hdfs dfs -deleteSnapshot /mydemo s2</span><br></pre></td></tr></table></figure>
+<h6 id="3-配额（quota）"><a href="#3-配额（quota）" class="headerlink" title="(3)  配额（quota）"></a>(3)  配额（quota）</h6><p>setQuota指的是对HDFS中某个目录设置文件和目录数量之和的最大值。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">hdfs dfsadmin -setQuota &lt;quota&gt; &lt;dirname&gt;...&lt;dirname&gt;</span><br><span class="line"></span><br><span class="line">例如：</span><br><span class="line">hdfs dfsadmin -setQuota 3 /mydemo3</span><br><span class="line">再试着上传三个文件：</span><br><span class="line">hdfs dfs -put txt1.txt /mydemo3 </span><br><span class="line">hdfs dfs -put txt2.txt /mydemo3 </span><br><span class="line">hdfs dfs -put txt3.txt /mydemo3</span><br></pre></td></tr></table></figure>
+<h6 id="4-空间配额setSpaceQuota"><a href="#4-空间配额setSpaceQuota" class="headerlink" title="(4)空间配额setSpaceQuota"></a>(4)空间配额setSpaceQuota</h6><p>setSpaceQuota针对的是设置HDFS中某个目录可用存储空间大小，单位是byte。在使用该命令的时候最好设置空间大小为数据块（默认128MB）的整数倍。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">hdfs dfsadmin -setSpaceQuota &lt;quota&gt; &lt;dirname&gt;...&lt;dirname&gt; </span><br><span class="line"></span><br><span class="line">例如：</span><br><span class="line">hdfs dfsadmin -setSpaceQuota 134217728 /mydemo4</span><br><span class="line">再试着上传三个文件：</span><br><span class="line">hdfs dfs -put txt1.txt /mydemo3 </span><br><span class="line">hdfs dfs -put txt2.txt /mydemo3 </span><br><span class="line">hdfs dfs -put txt3.txt /mydemo3</span><br></pre></td></tr></table></figure>
+<h6 id="5-报告文件系统的基本信息和统计信息"><a href="#5-报告文件系统的基本信息和统计信息" class="headerlink" title="(5)报告文件系统的基本信息和统计信息"></a>(5)报告文件系统的基本信息和统计信息</h6><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hdfs dfsadmin -report</span><br></pre></td></tr></table></figure>
+<p>(6)查看拓扑</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hdfs dfsadmin -printTopology</span><br></pre></td></tr></table></figure>
+<h4 id="搭建IDEA-Maven的JAVA开发环境"><a href="#搭建IDEA-Maven的JAVA开发环境" class="headerlink" title="搭建IDEA+Maven的JAVA开发环境"></a>搭建IDEA+Maven的JAVA开发环境</h4><h6 id="1、工具"><a href="#1、工具" class="headerlink" title="1、工具"></a>1、工具</h6><ul>
+<li>Windows 64 位</li>
+<li>JDK1.8 安装包 </li>
+<li>Maven 安装包</li>
+<li>IDEA 安装包</li>
+</ul>
+<h6 id="2、安装JDK"><a href="#2、安装JDK" class="headerlink" title="2、安装JDK"></a>2、安装JDK</h6><p>（1）     双击 jdk-8u171-windows-x64.exe 进行安装，安装过程一路点击下一步即可。</p>
+<p>（2）     配置环境变量</p>
+<p>JAVA_HOME，值为：安装路径，如：</p>
+<img src="/HDFS/2.jpg">
+<p>CLASSPATH，值为：%JAVA_HOME%/lib/dt.jar;%JAVA_HOME%/lib/tools.jar;.</p>
+<img src="/HDFS/3.jpg">
+<p>输入java -version 测试</p>
+<img src="/HDFS/4.jpg">
+<h6 id="3、安装Maven"><a href="#3、安装Maven" class="headerlink" title="3、安装Maven"></a>3、安装Maven</h6><p>（1）     maven解压</p>
+<p>（2）    配置环境变量</p>
+<p>MAVEN_HOME，值为：安装路径，如：</p>
+<img src="/HDFS/5.jpg">
+<p>PATH增加：%MAVEN_HOME%\bin</p>
+<img src="/HDFS/6.jpg">
+<p>（3）    输入mvn -v 测试</p>
+<img src="/HDFS/7.jpg">
+<p>（4）    配置Maven</p>
+<p>打开Maven安装目录下的conf目录，找到setting.xml，修改里面的内容</p>
+<p>​    （a）localRepository表示本地仓库的存储位置，网上下载的依赖包都会放在这里。增加以下红色方框代码。</p>
+<img src="/HDFS/8.jpg">
+<p>​    （b）找到“mirrors”，增加以下红色框内的配置。</p>
+<img src="/HDFS/9.jpg">
+<h6 id="4、安装IDEA"><a href="#4、安装IDEA" class="headerlink" title="4、安装IDEA"></a>4、安装IDEA</h6><p>（1）     ideaIC安装</p>
+<p>（2）    配置Maven</p>
+<p>点击Configure → Setting</p>
+<img src="/HDFS/10.jpg">
+<p>按下图步骤，设置maven及setting.xml的位置</p>
+<img src="/HDFS/11.jpg">
+<p> 设置完后，效果如下：</p>
+<img src="/HDFS/12.jpg">
+<p>5、创建工程</p>
+<p>（1）    点击【Create New Project】</p>
+<img src="/HDFS/13.jpg">
+<p>（2）    点击左侧的 “ Maven ” ，如果右上方提示 <no sdk> ，点击右侧的 New，选择 本地的 JDK 安装路径。接着点击 “ Create from archetype ” ，选择以 “ quickstart ” 结 尾的类型，这个类型可以快速创建一个具有 maven 基本文件结构的工程。 </no></p>
+<img src="/HDFS/14.jpg">
+<p>（3）    设置项目的“坐标”（groupId，artifactId，version）</p>
+<img src="/HDFS/15.jpg">
+<p>接下图，一路点【Next】直到完成</p>
+<p>（4）    项目刚开始会自动联网下载一些东西。下载完即可看到项目的结构。</p>
+<img src="/HDFS/16.jpg">
+<p>（5）    修改pom.xml，指定工程的主类</p>
+<p>​    在前的<build>节点下增加下面内容</build></p>
+<p><u><strong>注：<mainclass>与</mainclass>之间的内容表示主类，修改时要根据实际情况</strong></u></p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">plugins</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">plugin</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.apache.maven.plugins<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>maven-shade-plugin<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">version</span>&gt;</span>2.4.3<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">executions</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">execution</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">phase</span>&gt;</span>package<span class="tag">&lt;/<span class="name">phase</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">goals</span>&gt;</span></span><br><span class="line">          <span class="tag">&lt;<span class="name">goal</span>&gt;</span>shade<span class="tag">&lt;/<span class="name">goal</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">goals</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">configuration</span>&gt;</span></span><br><span class="line">          <span class="tag">&lt;<span class="name">transformers</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">transformer</span>                    <span class="attr">implementation</span>=<span class="string">"org.apache.maven.plugins.shade.resource.ManifestResourceTransformer"</span>&gt;</span></span><br><span class="line">              <span class="comment">&lt;!-- main()所在的类，注意修改 --&gt;</span></span><br><span class="line">              <span class="tag">&lt;<span class="name">mainClass</span>&gt;</span>com.mystudy.App<span class="tag">&lt;/<span class="name">mainClass</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;/<span class="name">transformer</span>&gt;</span></span><br><span class="line">          <span class="tag">&lt;/<span class="name">transformers</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">configuration</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;/<span class="name">execution</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">executions</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">plugin</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">plugins</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<img src="/HDFS/17.jpg">
+<p>（6）    pom.xml修改后，刷新工程，目的是重新刷新依赖等。</p>
+<p>​    点击pom.xml，右键，选择【Maven】 → 【Reimort】</p>
+<img src="/HDFS/18.jpg">
+<p>（7）    在IDEA中运行工程</p>
+<p>​    选中主类，右键，【Run App.main()】</p>
+<img src="/HDFS/19.jpg">
+<p>​    即可看到程序的输出结果</p>
+<img src="/HDFS/20.jpg">
+<p>（8）    在命令行中构建（打包）工程</p>
+<p>​    点击最左下角的小图标，点击Terminal</p>
+<img src="/HDFS/21.jpg">
+<p>​    输入命令打包：<code>mvn clean package</code></p>
+<img src="/HDFS/22.jpg">
+<p>​    可以看到以下结果</p>
+<img src="/HDFS/23.jpg">
+<p>（9）   在命令行中运行</p>
+<p>​    查看生成的jar包：<code>dir target</code></p>
+<img src="/HDFS/24.jpg">
+<p>​    运行jar包：<code>java -jar target/mypro-1.0-SNAPSHOT.jar</code></p>
+<img src="/HDFS/25.jpg">
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/hadoop-java/" rel="tag"><i class="fa fa-tag"></i> hadoop,java</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/python知识点.html" rel="next" title="Python知识点">
+                <i class="fa fa-chevron-left"></i> Python知识点
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/uploads/avatar.jpg" alt="rnalee">
+            
+              <p class="site-author-name" itemprop="name">rnalee</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">17</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">7</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">7</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/rnalee" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:1695219395@qq.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#下面将通过例子来演示hdfs操作命令（可以在终端输入-hdfs-dfs-help-查询命令用法）。"><span class="nav-number">1.</span> <span class="nav-text">下面将通过例子来演示hdfs操作命令（可以在终端输入 hdfs dfs -help 查询命令用法）。</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#1-列出子目录或子文件列出HDFS当前用户家目录下的文件及文件夹-前提：家目录已经存在，否则报错"><span class="nav-number">1.0.1.</span> <span class="nav-text">(1) 列出子目录或子文件列出HDFS当前用户家目录下的文件及文件夹(前提：家目录已经存在，否则报错)</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#2-创建目录-p表示父目录都会创建"><span class="nav-number">1.0.2.</span> <span class="nav-text">(2) 创建目录(-p表示父目录都会创建)</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#3-列出HDFS文件下名为-mydemo的文件夹中的文件-R表示列出所有子目录"><span class="nav-number">1.0.3.</span> <span class="nav-text">(3) 列出HDFS文件下名为/mydemo的文件夹中的文件(-R表示列出所有子目录)</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#4-上传文件"><span class="nav-number">1.0.4.</span> <span class="nav-text">(4) 上传文件</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#5-本地文件移动到HDFS"><span class="nav-number">1.0.5.</span> <span class="nav-text">(5)本地文件移动到HDFS</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#6-下载文件"><span class="nav-number">1.0.6.</span> <span class="nav-text">(6)下载文件</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#7-查看文件"><span class="nav-number">1.0.7.</span> <span class="nav-text">(7)查看文件</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#8-删除文档"><span class="nav-number">1.0.8.</span> <span class="nav-text">(8) 删除文档</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#9-文件或文件夹复制"><span class="nav-number">1.0.9.</span> <span class="nav-text">(9)文件或文件夹复制</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#10-文件或文件夹的移动"><span class="nav-number">1.0.10.</span> <span class="nav-text">(10)文件或文件夹的移动</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#11-追加到文件末尾的指令"><span class="nav-number">1.0.11.</span> <span class="nav-text">(11)追加到文件末尾的指令</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#12-文件合并再下载"><span class="nav-number">1.0.12.</span> <span class="nav-text">(12) 文件合并再下载</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#13-count统计（显示：目录个数，-文件个数，-文件总计大小-输入路径）"><span class="nav-number">1.0.13.</span> <span class="nav-text">(13) count统计（显示：目录个数， 文件个数， 文件总计大小 输入路径）</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#14-查看文件大小"><span class="nav-number">1.0.14.</span> <span class="nav-text">(14) 查看文件大小</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#15-设置扩展属性，获取扩展属性"><span class="nav-number">1.0.15.</span> <span class="nav-text">(15) 设置扩展属性，获取扩展属性</span></a></li></ol></li></ol><li class="nav-item nav-level-4"><a class="nav-link" href="#下面将通过例子来演示hdfs管理命令（可以在终端输入-hdfs-dfsadmin-help-查询命令用法）。"><span class="nav-number">2.</span> <span class="nav-text">下面将通过例子来演示hdfs管理命令（可以在终端输入 hdfs dfsadmin -help 查询命令用法）。</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#1-安全模式相关"><span class="nav-number">2.0.1.</span> <span class="nav-text">(1) 安全模式相关</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#2-快照开启或禁用快照功能"><span class="nav-number">2.0.2.</span> <span class="nav-text">(2) 快照开启或禁用快照功能</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#3-配额（quota）"><span class="nav-number">2.0.3.</span> <span class="nav-text">(3)  配额（quota）</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#4-空间配额setSpaceQuota"><span class="nav-number">2.0.4.</span> <span class="nav-text">(4)空间配额setSpaceQuota</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#5-报告文件系统的基本信息和统计信息"><span class="nav-number">2.0.5.</span> <span class="nav-text">(5)报告文件系统的基本信息和统计信息</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#搭建IDEA-Maven的JAVA开发环境"><span class="nav-number">3.</span> <span class="nav-text">搭建IDEA+Maven的JAVA开发环境</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#1、工具"><span class="nav-number">3.0.1.</span> <span class="nav-text">1、工具</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#2、安装JDK"><span class="nav-number">3.0.2.</span> <span class="nav-text">2、安装JDK</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#3、安装Maven"><span class="nav-number">3.0.3.</span> <span class="nav-text">3、安装Maven</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#4、安装IDEA"><span class="nav-number">3.0.4.</span> <span class="nav-text">4、安装IDEA</span></a></li></ol></li></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2019 &mdash; <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">rnalee</span>
+
+  
+</div>
+
+
+  <!--<div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a> v5.1.4</div>-->
+
+
+
+
+
+
+
+<script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<span id="busuanzi_container_site_pv">访问量:<span id="busuanzi_value_site_pv"></span>次</span>
+<span class="post-meta-divider">|</span>
+<span id="busuanzi_container_site_uv">访客数:<span id="busuanzi_value_site_uv"></span>人</span>
+<span class="post-meta-divider">|</span>
+ 
+
+
+<div class="theme-info">
+  <div class="powered-by"></div>
+  <span class="post-count">博客全站共22.9k字</span>
+</div>
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+          <span id="scrollpercent"><span>0</span>%</span>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
