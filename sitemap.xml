@@ -2,6 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://yoursite.com/Mysql%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4.html</loc>
+    
+    <lastmod>2020-01-05T02:33:54.604Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>http://yoursite.com/HDFS.html</loc>
     
     <lastmod>2020-01-02T01:59:22.564Z</lastmod>
