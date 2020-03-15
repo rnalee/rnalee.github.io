@@ -1,0 +1,949 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon.ico?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="搜索引擎">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="摘要：在Ubuntu16.04下基于Nutch2.2.1+Hbase0.92+Solr0.46搭建搜索引擎，本文所有搭建均为单机模式….">
+<meta name="keywords" content="搜索引擎">
+<meta property="og:type" content="article">
+<meta property="og:title" content="校内搜索引擎">
+<meta property="og:url" content="http://yoursite.com/校内搜索引擎.html">
+<meta property="og:site_name" content="李先生">
+<meta property="og:description" content="摘要：在Ubuntu16.04下基于Nutch2.2.1+Hbase0.92+Solr0.46搭建搜索引擎，本文所有搭建均为单机模式….">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://yoursite.com/校内搜索引擎/1.jpg">
+<meta property="og:image" content="http://yoursite.com/校内搜索引擎/2.jpg">
+<meta property="og:image" content="http://yoursite.com/校内搜索引擎/3.jpg">
+<meta property="og:image" content="http://yoursite.com/校内搜索引擎/4.jpg">
+<meta property="og:image" content="http://yoursite.com/校内搜索引擎/5.jpg">
+<meta property="og:image" content="http://yoursite.com/校内搜索引擎/6.jpg">
+<meta property="og:image" content="http://yoursite.com/校内搜索引擎/7.jpg">
+<meta property="og:image" content="http://yoursite.com/校内搜索引擎/8.jpg">
+<meta property="og:image" content="http://yoursite.com/校内搜索引擎/9.jpg">
+<meta property="og:image" content="http://yoursite.com/校内搜索引擎/10.jpg">
+<meta property="og:image" content="http://yoursite.com/校内搜索引擎/11.jpg">
+<meta property="og:image" content="http://yoursite.com/校内搜索引擎/12.jpg">
+<meta property="og:image" content="http://yoursite.com/校内搜索引擎/13.jpg">
+<meta property="og:image" content="http://yoursite.com/校内搜索引擎/14.jpg">
+<meta property="og:updated_time" content="2020-03-15T15:03:08.441Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="校内搜索引擎">
+<meta name="twitter:description" content="摘要：在Ubuntu16.04下基于Nutch2.2.1+Hbase0.92+Solr0.46搭建搜索引擎，本文所有搭建均为单机模式….">
+<meta name="twitter:image" content="http://yoursite.com/校内搜索引擎/1.jpg">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":true,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/校内搜索引擎.html">
+
+
+
+
+
+
+  <script>
+  (function(i,s,o,g,r,a,m){i["DaoVoiceObject"]=r;i[r]=i[r]||function(){(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;a.charset="utf-8";m.parentNode.insertBefore(a,m)})(window,document,"script",('https:' == document.location.protocol ? 'https:' : 'http:') + "//widget.daovoice.io/widget/0f81ff2f.js","daovoice")
+  daovoice('init', {
+      app_id: "ee7581bd"
+    });
+  daovoice('update');
+  </script>
+
+  <title>校内搜索引擎 | 李先生</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+ 
+  
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">李先生</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">rnalee</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首&emsp;&emsp;页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
+            
+            关于博主
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标&emsp;&emsp;签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分&emsp;&emsp;类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归&emsp;&emsp;档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/校内搜索引擎.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="rnalee">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/uploads/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="李先生">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">校内搜索引擎</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-03-15T23:01:57+08:00">
+                2020-03-15
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/搜索引擎/" itemprop="url" rel="index">
+                    <span itemprop="name">搜索引擎</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                  <span class="post-meta-divider">|</span>
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  1.6k 字
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  7 分钟
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>摘要：在Ubuntu16.04下基于Nutch2.2.1+Hbase0.92+Solr0.46搭建搜索引擎，本文所有搭建均为单机模式….</p>
+<a id="more"></a>
+<h4 id="一、Nutch"><a href="#一、Nutch" class="headerlink" title="一、Nutch"></a>一、Nutch</h4><p><strong>1、概念</strong></p>
+<p>Nutch是一个Java实现的开源网络爬虫项目，可以用于直接爬取网页内容。目前Nutch发展至今已有2.x版本，该版本与1.x版本的主要区别是底层存储不同。1.x版本是基于Hadoop框架，使用的是HDFS文件系统，而2.x使用的是Apache Gora，进而Nutch可以与Hbase、Mysql等数据库结合。</p>
+<p><strong>2、搭建</strong></p>
+<p>tips：Nutch2.x版本提供的是源码，故需要在jdk1.8环境下进行ant编译，ant工具的安装不做说明</p>
+<ul>
+<li><p>下载链接：<a href="http://archive.apache.org/dist/nutch/2.2.1/" target="_blank" rel="noopener">http://archive.apache.org/dist/nutch/2.2.1/</a></p>
+</li>
+<li><p>下载完源码包后进行解压，并修改文件名为nutch</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">tar -zxvf  apache-nutch-2.2.1-src.tar.gz  -C  ~	</span><br><span class="line">mv  apache-nutch-2.2.1   nutch</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>修改配置文件</p>
+<p>（1）、conf/nutch-site.xml,制定Apache Gora属性。</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">property</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">name</span>&gt;</span>storage.data.store.class<span class="tag">&lt;/<span class="name">name</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">value</span>&gt;</span>org.apache.gora.hbase.store.HBaseStore<span class="tag">&lt;/<span class="name">value</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">description</span>&gt;</span>Default class for storing data<span class="tag">&lt;/<span class="name">description</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">property</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">name</span>&gt;</span>http.agent.name<span class="tag">&lt;/<span class="name">name</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">value</span>&gt;</span>Your Name<span class="tag">&lt;/<span class="name">value</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<img src="/校内搜索引擎/1.jpg">
+<p>（2）、conf/gola.properies，将数据库默认改为Hbase</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">gora.datastore.default=org.apache.gora.hbase.store.HBaseStore</span><br><span class="line">#gora.sqlstore.jdbc.driver=org.hsqldb.jdbc.JDBCDriver</span><br><span class="line">#gora.sqlstore.jdbc.url=jdbc:hsqldb:hsql://localhost/nutchtest</span><br><span class="line">#gora.sqlstore.jdbc.user=sa</span><br><span class="line">#gora.sqlstore.jdbc.password=</span><br></pre></td></tr></table></figure>
+<img src="/校内搜索引擎/2.jpg">
+<p>（3）、ivy/ivy.xml，取消hbase驱动的注释，编译时才会下载hbase驱动的jar包</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependency</span> <span class="attr">org</span>=<span class="string">"org.apache.gora"</span> <span class="attr">name</span>=<span class="string">"gora-hbase"</span> <span class="attr">rev</span>=<span class="string">"0.3"</span> <span class="attr">conf</span>=<span class="string">"*-&gt;default"</span> /&gt;</span></span><br></pre></td></tr></table></figure>
+<img src="/校内搜索引擎/3.jpg">
+<p>（4）、ivy/ivysettings.xml，默认的maven镜像链接不好使，到时编译下载jar包超时，</p>
+<p>使用阿里云镜像<a href="http://maven.aliyun.com/nexus/content/groups/public/替换掉http://repo1.maven.org/maven2/" target="_blank" rel="noopener">http://maven.aliyun.com/nexus/content/groups/public/替换掉http://repo1.maven.org/maven2/</a></p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"repo.maven.org"</span></span></span><br><span class="line"><span class="tag">   <span class="attr">value</span>=<span class="string">"http://maven.aliyun.com/nexus/content/groups/public/"</span></span></span><br><span class="line"><span class="tag">   <span class="attr">override</span>=<span class="string">"false"</span>/&gt;</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>编译在nutch目录下，进行编译，编译时间很长。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ant runtime</span><br></pre></td></tr></table></figure>
+<p>编译成功后nutch目录下会生成build文件和runtime文件。</p>
+<img src="/校内搜索引擎/4.jpg">
+</li>
+</ul>
+<p><strong>3、修改环境变量</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vim  ~/.bashrc</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">export PATH=/home/lee/nutch/runtime/local/bin:$PATH</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">source  ~/.bashrc</span><br></pre></td></tr></table></figure>
+<p><strong>4、编译错误解决</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Trying to override old definition of task javac</span><br><span class="line">  [taskdef] Could not load definitions from resource org/sonar/ant/antlib.xml. It could not be found.</span><br><span class="line">ivy-probe-antlib:</span><br><span class="line">ivy-download:</span><br><span class="line">  [taskdef] Could not load definitions from resource org/sonar/ant/antlib.xml. It could not be found.</span><br></pre></td></tr></table></figure>
+<p>出现该错误是nutch中缺少相应的jar包。故</p>
+<p>下载sonar-ant-task-2.1.jar，放入nutch文件中，修改nutch/build.xml，引入jar包</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!-- Define the Sonar task if this hasn't been done in a common script --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">taskdef</span> <span class="attr">uri</span>=<span class="string">"antlib:org.sonar.ant"</span> <span class="attr">resource</span>=<span class="string">"org/sonar/ant/antlib.xml"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">classpath</span> <span class="attr">path</span>=<span class="string">"$&#123;ant.library.dir&#125;"</span> /&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">classpath</span> <span class="attr">path</span>=<span class="string">"$&#123;mysql.library.dir&#125;"</span> /&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">classpath</span>&gt;</span><span class="tag">&lt;<span class="name">fileset</span> <span class="attr">dir</span>=<span class="string">"."</span> <span class="attr">includes</span>=<span class="string">"sonar*.jar"</span> /&gt;</span><span class="tag">&lt;/<span class="name">classpath</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">taskdef</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<img src="/校内搜索引擎/5.jpg">
+<p><strong>5、测试是否安装成功</strong></p>
+<p>在home目录下输入nutch命令和crawl命令，出现以下结果则安装成功</p>
+<img src="/校内搜索引擎/6.jpg">
+<img src="/校内搜索引擎/7.jpg">
+<h4 id="二、Hbase"><a href="#二、Hbase" class="headerlink" title="二、Hbase"></a>二、Hbase</h4><p><strong>1、概念</strong></p>
+<p>Hbase是一个提供高可靠性、高性能、可伸缩、实时随机读写的面向列族非关系型数据库，其是构建在HDFS分布式系统上，由Google公司BigTable思想开源实现。Hbase具有存储非结构化数据能力。但它只针对rowkey的进行一级索引。</p>
+<p><strong>2、搭建</strong></p>
+<ul>
+<li><p>下载链接：<a href="http://archive.apache.org/dist/hbase/hbase-0.92.2/" target="_blank" rel="noopener">http://archive.apache.org/dist/hbase/hbase-0.92.2/</a></p>
+</li>
+<li><p>解压，并修改文件名为hbase</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">tar -zxvf hbase-0.92.2.tar.gz -C ~</span><br><span class="line">mv hbase-0.92.2 hbase</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>修改conf/hbase-site.xml文件，指定存放HBase的相关信息的文件</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&lt;property&gt;</span><br><span class="line">&lt;name&gt;hbase.rootdir&lt;/name&gt;</span><br><span class="line">&lt;value&gt;file:///home/lee/hbase/data&lt;/value&gt;</span><br><span class="line">&lt;/property&gt;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>修改环境变量</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vim  ~/.bashrc</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">export HBASE_HOME=/home/lee/hbase</span><br><span class="line">export PATH=$HBASE_HOME/bin:$PATH</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">source  ~/.bashrc</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p><strong>3、测试是否安装成功</strong></p>
+<p>进入hbase目录下，输入start-hbase.sh命令，出现以下结果后，进入hbase shell测试</p>
+<img src="/校内搜索引擎/8.jpg">
+<img src="/校内搜索引擎/9.jpg">
+<h4 id="三、Solr"><a href="#三、Solr" class="headerlink" title="三、Solr"></a><strong>三、Solr</strong></h4><p><strong>1、概念</strong></p>
+<p>Solr是一个企业级的全文检索服务器，它能提供API接口，用户可以通过http请求，向搜索引擎服务器提交一定格式的XML文件，生成索引。因为Hbase只针对rowkey的一级索引，不支持二级索引，所以与Solr的结合能打破这个局限。</p>
+<p><strong>2、搭建</strong></p>
+<ul>
+<li><p>下载链接：<a href="http://archive.apache.org/dist/lucene/solr/4.6.1/" target="_blank" rel="noopener">http://archive.apache.org/dist/lucene/solr/4.6.1/</a></p>
+</li>
+<li><p>解压，并修改文件名为solr</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">tar -zxvf solr-4.6.1.tgz -C ~</span><br><span class="line">mv solr-4.6.1 solr</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p><strong>3、运行</strong></p>
+<p>进入solr/example目录下输入java -jar start.jar命令，在浏览器输入 <a href="http://ip:8983/solr/" target="_blank" rel="noopener">http://ip:8983/solr/</a>，看到一下界面则安装成功。</p>
+<img src="/校内搜索引擎/10.jpg">
+<h4 id="四、Nutch、Hbase、Solr整合"><a href="#四、Nutch、Hbase、Solr整合" class="headerlink" title="四、Nutch、Hbase、Solr整合"></a><strong>四、Nutch、Hbase、Solr整合</strong></h4><p><strong>1、Nutch和Solr结合</strong></p>
+<ul>
+<li><p>将solr/example/solr/collection1/conf下的schema.xml删除</p>
+</li>
+<li><p>复制nutch/runtime/local/conf目录下的schema-solr4.xml到solr/example/solr/collection1/conf目录下</p>
+</li>
+<li><p>将solr/example/solr/collection1/conf下的schema-solr4.xml重命名为schema.xml</p>
+</li>
+<li><p>修改schema.xml，在fields域里最后添加一行</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">field</span> <span class="attr">name</span>=<span class="string">"_version_"</span> <span class="attr">type</span>=<span class="string">"long"</span> <span class="attr">indexed</span>=<span class="string">"true"</span> <span class="attr">stored</span>=<span class="string">"true"</span> <span class="attr">multiValued</span>=<span class="string">"false"</span>/&gt;</span></span><br></pre></td></tr></table></figure>
+<img src="/校内搜索引擎/11.jpg">
+</li>
+</ul>
+<p><strong>2、抓取数据</strong></p>
+<ul>
+<li><p>在nutch/runtime/local目录下创建urls文件夹，进入urls文件夹，创建seed.txt文件，填写目标网页链接</p>
+</li>
+<li><p>可以在nutch/conf/regex-urlfilter.txt根据自身需求添加正则表达式过滤</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">nutch的正则过滤时，采用的匹配函数式Patterm.matcher，而不是Patterm.matches。</span><br><span class="line">Patterm.mather在匹配时，只要找到待爬取网页的url的子串和正则匹配，就通过。</span><br><span class="line">Patterm.matcher要求待爬取网页的url和regex完全匹配。</span><br><span class="line">也就是说nutch的正则其实是和找url中是否有字串符合正则。所以做nutch的正则配置文件时，要在http前加入^符号</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>启动solr</p>
+</li>
+<li><p>在home目录下输入以下命令</p>
+<p>crawl /home/lee/nutch/runtime/local/urls/seed.txt gdupt  <a href="http://ip:8983/solr" target="_blank" rel="noopener">http://ip:8983/solr</a> 1</p>
+<p>tips：命令参数解释</p>
+</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">Usage: crawl &lt;seedDir&gt; &lt;crawlID&gt; [&lt;solrUrl&gt;] &lt;numberOfRounds&gt;</span><br><span class="line"></span><br><span class="line">/home/lee/nutch/runtime/local/urls/seed.txt,是存放了种子url</span><br><span class="line">gdupt 是crawlId,这会在HBase中创建一张以crawlId为前缀的表，例如gdupt_webpage。</span><br><span class="line">http://ip:8983/solr/,这是Solr服务器</span><br><span class="line">1，numberOfRounds，迭代的次数</span><br></pre></td></tr></table></figure>
+<ul>
+<li>查看结果，在hbase中查看是否有gdupt_webpage表,solr的collection1的Statistics是否有数据。</li>
+</ul>
+<img src="/校内搜索引擎/12.jpg">
+<img src="/校内搜索引擎/13.jpg">
+<p><strong>3、错误解决</strong></p>
+<ul>
+<li><p><strong>SolrIndexerJob: java.lang.RuntimeException: job failed:</strong></p>
+<p>该错误可能是找不到插件的原因，在nutch/runtime/conf/目录下的nutch-site.xml文件，加上</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&lt;property&gt;</span><br><span class="line">      &lt;name&gt;plugin.folders&lt;/name&gt;</span><br><span class="line">     &lt;value&gt;plugins&lt;/value&gt;</span><br><span class="line"> &lt;/property&gt;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>org.apache.gora.util.GoraException: java.lang.RuntimeException: java.lang.IllegalArgumentException: Not a host:port pair: ？12165@..</strong></p>
+<p>该错误的原因是nutch/runtime/local/lib下的hbase-0.90.0.jar与当前的环境的hbase版本不一样，删除hbase-0.90.0.jar，导入hbase-0.92.1.jar。</p>
+</li>
+</ul>
+<img src="/校内搜索引擎/14.jpg">
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/搜索引擎/" rel="tag"><i class="fa fa-tag"></i> 搜索引擎</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/搜索引擎.html" rel="next" title="搜索引擎">
+                <i class="fa fa-chevron-left"></i> 搜索引擎
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/uploads/avatar.jpg" alt="rnalee">
+            
+              <p class="site-author-name" itemprop="name">rnalee</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">20</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">9</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">9</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/rnalee" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:1695219395@qq.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#一、Nutch"><span class="nav-number">1.</span> <span class="nav-text">一、Nutch</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#二、Hbase"><span class="nav-number">2.</span> <span class="nav-text">二、Hbase</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#三、Solr"><span class="nav-number">3.</span> <span class="nav-text">三、Solr</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#四、Nutch、Hbase、Solr整合"><span class="nav-number">4.</span> <span class="nav-text">四、Nutch、Hbase、Solr整合</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2019 &mdash; <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">rnalee</span>
+
+  
+</div>
+
+
+  <!--<div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a> v5.1.4</div>-->
+
+
+
+
+
+
+
+<script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<span id="busuanzi_container_site_pv">访问量:<span id="busuanzi_value_site_pv"></span>次</span>
+<span class="post-meta-divider">|</span>
+<span id="busuanzi_container_site_uv">访客数:<span id="busuanzi_value_site_uv"></span>人</span>
+<span class="post-meta-divider">|</span>
+ 
+
+
+<div class="theme-info">
+  <div class="powered-by"></div>
+  <span class="post-count">博客全站共26.7k字</span>
+</div>
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+          <span id="scrollpercent"><span>0</span>%</span>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

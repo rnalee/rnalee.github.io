@@ -101,7 +101,7 @@
 <meta property="og:image" content="http://yoursite.com/搜索引擎/12.jpg">
 <meta property="og:image" content="http://yoursite.com/搜索引擎/13.jpg">
 <meta property="og:image" content="http://yoursite.com/搜索引擎/14.jpg">
-<meta property="og:updated_time" content="2020-03-15T14:43:19.548Z">
+<meta property="og:updated_time" content="2020-03-15T14:59:44.139Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="搜索引擎">
 <meta name="twitter:description" content="摘要：在Ubuntu16.04下基于Nutch2.2.1+Hbase0.92+Solr0.46搭建搜索引擎，本文所有搭建均为单机模式….">
@@ -479,8 +479,7 @@
 <p>进入hbase目录下，输入start-hbase.sh命令，出现以下结果后，进入hbase shell测试</p>
 <img src="/搜索引擎/8.jpg">
 <img src="/搜索引擎/9.jpg">
-<p><strong>三、Solr</strong></p>
-<p><strong>1、概念</strong></p>
+<h5 id="三、Solr"><a href="#三、Solr" class="headerlink" title="三、Solr"></a><strong>三、Solr</strong></h5><p><strong>1、概念</strong></p>
 <p>Solr是一个企业级的全文检索服务器，它能提供API接口，用户可以通过http请求，向搜索引擎服务器提交一定格式的XML文件，生成索引。因为Hbase只针对rowkey的一级索引，不支持二级索引，所以与Solr的结合能打破这个局限。</p>
 <p><strong>2、搭建</strong></p>
 <ul>
@@ -493,8 +492,7 @@
 <p><strong>3、运行</strong></p>
 <p>进入solr/example目录下输入java -jar start.jar命令，在浏览器输入 <a href="http://ip:8983/solr/" target="_blank" rel="noopener">http://ip:8983/solr/</a>，看到一下界面则安装成功。</p>
 <img src="/搜索引擎/10.jpg">
-<p><strong>四、Nutch、Hbase、Solr整合</strong></p>
-<p><strong>1、Nutch和Solr结合</strong></p>
+<h4 id="四、Nutch、Hbase、Solr整合"><a href="#四、Nutch、Hbase、Solr整合" class="headerlink" title="四、Nutch、Hbase、Solr整合"></a><strong>四、Nutch、Hbase、Solr整合</strong></h4><p><strong>1、Nutch和Solr结合</strong></p>
 <ul>
 <li><p>将solr/example/solr/collection1/conf下的schema.xml删除</p>
 </li>
@@ -577,6 +575,10 @@
 
           <div class="post-nav-prev post-nav-item">
             
+              <a href="/校内搜索引擎.html" rel="prev" title="校内搜索引擎">
+                校内搜索引擎 <i class="fa fa-chevron-right"></i>
+              </a>
+            
           </div>
         </div>
       
@@ -654,7 +656,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">19</span>
+                  <span class="site-state-item-count">20</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -725,7 +727,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#一、Nutch"><span class="nav-number">1.</span> <span class="nav-text">一、Nutch</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#二、Hbase"><span class="nav-number">2.</span> <span class="nav-text">二、Hbase</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#一、Nutch"><span class="nav-number">1.</span> <span class="nav-text">一、Nutch</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#二、Hbase"><span class="nav-number">2.</span> <span class="nav-text">二、Hbase</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#三、Solr"><span class="nav-number">2.1.</span> <span class="nav-text">三、Solr</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#四、Nutch、Hbase、Solr整合"><span class="nav-number">3.</span> <span class="nav-text">四、Nutch、Hbase、Solr整合</span></a></li></ol></div>
             
 
           </div>
@@ -773,7 +775,7 @@
 
 <div class="theme-info">
   <div class="powered-by"></div>
-  <span class="post-count">博客全站共25.1k字</span>
+  <span class="post-count">博客全站共26.7k字</span>
 </div>
 
         
