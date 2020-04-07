@@ -91,7 +91,7 @@
 <meta property="og:image" content="http://yoursite.com/计算机网络知识点（一）/2.jpg">
 <meta property="og:image" content="http://yoursite.com/计算机网络知识点（一）/3.jpg">
 <meta property="og:image" content="http://yoursite.com/计算机网络知识点（一）/4.jpg">
-<meta property="og:updated_time" content="2020-04-07T07:30:17.857Z">
+<meta property="og:updated_time" content="2020-04-07T07:54:02.189Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="计算机网络知识点（一）">
 <meta name="twitter:description" content="摘要：计算机网络..">
@@ -364,7 +364,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  941 字
+                  1.1k 字
                 </span>
               
 
@@ -421,12 +421,14 @@
 <p>​    ②、被动方返回报文给主动方说，之前没收到请求，现在准备断开。</p>
 <p>​    ③、被动方再发送报文给主动方说，现在准备就绪，可以断开。</p>
 <p>​    ④、主动方发送报文给被动方，确定断开。</p>
-<h5 id="5、URL请求流程"><a href="#5、URL请求流程" class="headerlink" title="5、URL请求流程"></a>5、URL请求流程</h5><p>​    ①、DNS域名解析。</p>
+<h5 id="5、TCP和TCP-IP的区别"><a href="#5、TCP和TCP-IP的区别" class="headerlink" title="5、TCP和TCP/IP的区别"></a>5、TCP和TCP/IP的区别</h5><p>​    TCP/IP是传输控制/网际协议，又叫做网络通讯协议。TCP/IP是一个协议族，是因为TCP/IP协议包括TCP、IP、UDP、ICMP、RIP、TELNET、FTP、SMTP、ARP、TFTP等许多协议。它包括上百个各种功能的协议，比如：远程登录、文件传输、电子邮件等等。</p>
+<h5 id="6、IP报文经过一个路由器改变哪些字段？"><a href="#6、IP报文经过一个路由器改变哪些字段？" class="headerlink" title="6、IP报文经过一个路由器改变哪些字段？"></a>6、IP报文经过一个路由器改变哪些字段？</h5><p>​    源IP地址和目的IP地址，源MAC地址和目的MAC地址，TCL值</p>
+<h5 id="7、URL请求流程"><a href="#7、URL请求流程" class="headerlink" title="7、URL请求流程"></a>7、URL请求流程</h5><p>​    ①、DNS域名解析。</p>
 <p>​    ②、建立TCP连接。</p>
 <p>​    ③、发送请求，服务器进行处理</p>
 <p>​    ④、四次挥手断开连接。</p>
-<h5 id="6、URL的组成成分。"><a href="#6、URL的组成成分。" class="headerlink" title="6、URL的组成成分。"></a>6、URL的组成成分。</h5><p>​    协议部分、域名部分、端口部分、虚拟目录部分、文件名部分、锚部分、参数部分</p>
-<h5 id="7、HTTP的请求方式有哪几种，GET和POST的区别？"><a href="#7、HTTP的请求方式有哪几种，GET和POST的区别？" class="headerlink" title="7、HTTP的请求方式有哪几种，GET和POST的区别？"></a>7、HTTP的请求方式有哪几种，GET和POST的区别？</h5><p>​    （1）、HTTP的请求方式有八种</p>
+<h5 id="8、URL的组成成分。"><a href="#8、URL的组成成分。" class="headerlink" title="8、URL的组成成分。"></a>8、URL的组成成分。</h5><p>​    协议部分、域名部分、端口部分、虚拟目录部分、文件名部分、锚部分、参数部分</p>
+<h5 id="9、HTTP的请求方式有哪几种，GET和POST的区别？"><a href="#9、HTTP的请求方式有哪几种，GET和POST的区别？" class="headerlink" title="9、HTTP的请求方式有哪几种，GET和POST的区别？"></a>9、HTTP的请求方式有哪几种，GET和POST的区别？</h5><p>​    （1）、HTTP的请求方式有八种</p>
 <p>​        ①、GET：向服务器请求指定的资源</p>
 <p>​        ②、POST：向服务器提交数据请求处理，数据被包含在请求体中。</p>
 <p>​        ③、PUT : 向服务器上传指定的数据。</p>
@@ -439,18 +441,22 @@
 <p>​        ①、GET通过URL提交数据，数据在URL中可以看到；POST数据放置在 HTTP 包的 Body 中，数据无法    看到。</p>
 <p>​        ②、GET发送的数据不受保护，安全性低；POST发送的数据可以使用多种编码技术，安全性较高。</p>
 <p>​        ③、GET发送的数据量较小，且查询结果网页能够收藏；POST发送的数据量比较大，网页无法收藏。</p>
-<h5 id="8、常见状态码"><a href="#8、常见状态码" class="headerlink" title="8、常见状态码"></a>8、常见状态码</h5><p>​    ①、202：操作成功。    </p>
+<h5 id="10、常见状态码"><a href="#10、常见状态码" class="headerlink" title="10、常见状态码"></a>10、常见状态码</h5><p>​    ①、202：操作成功。    </p>
 <p>​    ②、403：访问受限，授权过期。</p>
 <p>​    ③、404：资源、服务器未找到。</p>
 <p>​    ④、504：网关超时，服务作为网关或代理，但没有及时从上游服务器收到请求。</p>
 <p>​    ⑤、30x：重定向。</p>
-<h5 id="9、C-S两层架构，客户端-服务器模式"><a href="#9、C-S两层架构，客户端-服务器模式" class="headerlink" title="9、C/S两层架构，客户端/服务器模式"></a>9、C/S两层架构，客户端/服务器模式</h5><img src="/计算机网络知识点（一）/3.jpg">
+<h5 id="11、C-S两层架构，客户端-服务器模式"><a href="#11、C-S两层架构，客户端-服务器模式" class="headerlink" title="11、C/S两层架构，客户端/服务器模式"></a>11、C/S两层架构，客户端/服务器模式</h5><img src="/计算机网络知识点（一）/3.jpg">
 <p>​    ①、第一层：在客户机系统上结合了界面显示与业务逻辑。</p>
 <p>​    ②、第二层：通过网络结合了数据库服务器。</p>
-<h5 id="10、B-S三层架构，浏览器-服务器模式"><a href="#10、B-S三层架构，浏览器-服务器模式" class="headerlink" title="10、B/S三层架构，浏览器/服务器模式"></a>10、B/S三层架构，浏览器/服务器模式</h5><img src="/计算机网络知识点（一）/4.jpg">
+<h5 id="12、B-S三层架构，浏览器-服务器模式"><a href="#12、B-S三层架构，浏览器-服务器模式" class="headerlink" title="12、B/S三层架构，浏览器/服务器模式"></a>12、B/S三层架构，浏览器/服务器模式</h5><img src="/计算机网络知识点（一）/4.jpg">
 <p>​    ①、第一层（表示层）：主要完成用户和后台的交互及最终查询结果的输出功能。</p>
 <p>​    ②、第二层（逻辑层）：主要利用服务器完成客户端的应用逻辑功能。</p>
 <p>​    ③、第三层（数据层）：主要是接受客户请求后独立进行各行运算。</p>
+<h5 id="13、计算机网络的功能有哪些？"><a href="#13、计算机网络的功能有哪些？" class="headerlink" title="13、计算机网络的功能有哪些？"></a>13、计算机网络的功能有哪些？</h5><p>​    ①、数据通信。</p>
+<p>​    ②、资源共享。</p>
+<p>​    ③、负载均衡。</p>
+<p>​    ④、高可靠性。</p>
 
       
     </div>
@@ -490,6 +496,10 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/Linux常见命令.html" rel="prev" title="Linux常见命令">
+                Linux常见命令 <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -568,7 +578,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">21</span>
+                  <span class="site-state-item-count">22</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -639,7 +649,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-5"><a class="nav-link" href="#1、OSI七层模型及各层协议"><span class="nav-number">1.</span> <span class="nav-text">1、OSI七层模型及各层协议</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#2、TCP和UDP的区别？"><span class="nav-number">2.</span> <span class="nav-text">2、TCP和UDP的区别？</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#3、三次握手（为了建立TCP连接）。"><span class="nav-number">3.</span> <span class="nav-text">3、三次握手（为了建立TCP连接）。</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#4、四次挥手"><span class="nav-number">4.</span> <span class="nav-text">4、四次挥手</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#5、URL请求流程"><span class="nav-number">5.</span> <span class="nav-text">5、URL请求流程</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#6、URL的组成成分。"><span class="nav-number">6.</span> <span class="nav-text">6、URL的组成成分。</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#7、HTTP的请求方式有哪几种，GET和POST的区别？"><span class="nav-number">7.</span> <span class="nav-text">7、HTTP的请求方式有哪几种，GET和POST的区别？</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#8、常见状态码"><span class="nav-number">8.</span> <span class="nav-text">8、常见状态码</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#9、C-S两层架构，客户端-服务器模式"><span class="nav-number">9.</span> <span class="nav-text">9、C/S两层架构，客户端/服务器模式</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#10、B-S三层架构，浏览器-服务器模式"><span class="nav-number">10.</span> <span class="nav-text">10、B/S三层架构，浏览器/服务器模式</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-5"><a class="nav-link" href="#1、OSI七层模型及各层协议"><span class="nav-number">1.</span> <span class="nav-text">1、OSI七层模型及各层协议</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#2、TCP和UDP的区别？"><span class="nav-number">2.</span> <span class="nav-text">2、TCP和UDP的区别？</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#3、三次握手（为了建立TCP连接）。"><span class="nav-number">3.</span> <span class="nav-text">3、三次握手（为了建立TCP连接）。</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#4、四次挥手"><span class="nav-number">4.</span> <span class="nav-text">4、四次挥手</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#5、TCP和TCP-IP的区别"><span class="nav-number">5.</span> <span class="nav-text">5、TCP和TCP/IP的区别</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#6、IP报文经过一个路由器改变哪些字段？"><span class="nav-number">6.</span> <span class="nav-text">6、IP报文经过一个路由器改变哪些字段？</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#7、URL请求流程"><span class="nav-number">7.</span> <span class="nav-text">7、URL请求流程</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#8、URL的组成成分。"><span class="nav-number">8.</span> <span class="nav-text">8、URL的组成成分。</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#9、HTTP的请求方式有哪几种，GET和POST的区别？"><span class="nav-number">9.</span> <span class="nav-text">9、HTTP的请求方式有哪几种，GET和POST的区别？</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#10、常见状态码"><span class="nav-number">10.</span> <span class="nav-text">10、常见状态码</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#11、C-S两层架构，客户端-服务器模式"><span class="nav-number">11.</span> <span class="nav-text">11、C/S两层架构，客户端/服务器模式</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#12、B-S三层架构，浏览器-服务器模式"><span class="nav-number">12.</span> <span class="nav-text">12、B/S三层架构，浏览器/服务器模式</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#13、计算机网络的功能有哪些？"><span class="nav-number">13.</span> <span class="nav-text">13、计算机网络的功能有哪些？</span></a></li></ol></div>
             
 
           </div>
@@ -687,7 +697,7 @@
 
 <div class="theme-info">
   <div class="powered-by"></div>
-  <span class="post-count">博客全站共26.4k字</span>
+  <span class="post-count">博客全站共26.8k字</span>
 </div>
 
         
