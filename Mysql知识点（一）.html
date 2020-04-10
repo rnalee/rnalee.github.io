@@ -87,7 +87,7 @@
 <meta property="og:site_name" content="李先生">
 <meta property="og:description" content="摘要：Mysql知识点…">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2020-04-09T07:35:12.300Z">
+<meta property="og:updated_time" content="2020-04-10T01:28:08.599Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Mysql知识点（一）">
 <meta name="twitter:description" content="摘要：Mysql知识点…">
@@ -359,7 +359,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  437 字
+                  892 字
                 </span>
               
 
@@ -375,7 +375,7 @@
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
                 <span title="阅读时长">
-                  1 分钟
+                  3 分钟
                 </span>
               
             </div>
@@ -411,6 +411,18 @@
 <h5 id="5、范式。"><a href="#5、范式。" class="headerlink" title="5、范式。"></a>5、范式。</h5><p>​    ①、第一范式：每个列不可以再拆分。</p>
 <p>​    ②、第二范式：非主键列完全依赖于主键列，而不能是依赖于主键的一部分。</p>
 <p>​    ③、第三范式：非主键列只依赖于主键，不依赖于其他非主键。</p>
+<h5 id="6、事务隔离级别哪些？"><a href="#6、事务隔离级别哪些？" class="headerlink" title="6、事务隔离级别哪些？"></a>6、事务隔离级别哪些？</h5><p>​    ①、未提交读（Read Uncommitted）：允许脏读，其他事务只要修改了数据，既未提交，本事务也能看到<strong>修改后</strong>的数据值。也就是可能读取到其他会话中未提交事务修改的数据。</p>
+<p>​    ②、提交读（Read Committed）：只能读取到已经提交的数据。</p>
+<p>​    ③、可重复读（Repeated Read）：可重复读。无论其他事务是否修改并提交了数据,在这个事务中看到的数据值始终不受其他事务的影响。</p>
+<p>​    ④、串行读（Serializable）：完全串行化的读，每次读都需要获得表级共享锁,读写相互都会阻塞。</p>
+<p>提示：MySQL数据库(InnoDB引擎)默认使用可重复读（ Repeatable read)。</p>
+<h5 id="7、Mysql数据库的索引类型有哪些？"><a href="#7、Mysql数据库的索引类型有哪些？" class="headerlink" title="7、Mysql数据库的索引类型有哪些？"></a>7、Mysql数据库的索引类型有哪些？</h5><p>​    ①、index：普通索引,数据可以重复，没有任何限制。</p>
+<p>​    ②、unique：唯一索引，要求索引列的值必须唯一，但允许有空值；如果是组合索引,那么列值的组合必须唯一。</p>
+<p>​    ③、primary key：主键索引，是一种特殊的唯一索引，一个表只能有一个主键，不允许有空值，一般是在创建类的同时创建主键索引。</p>
+<p>​    ④、组合索引：在多个字段上创建的索引，只有在查询条件中使用了创建索引时的第一个字段，索引才会被使用。</p>
+<h5 id="8、Mysql中的锁类型有哪些？"><a href="#8、Mysql中的锁类型有哪些？" class="headerlink" title="8、Mysql中的锁类型有哪些？"></a>8、Mysql中的锁类型有哪些？</h5><p>​    ①、表级锁：开销小，加锁快，不会出现死锁。锁的粒度大，发生锁冲突的概率最高，并发量最低。</p>
+<p>​    ②、行级锁：开销大，加锁慢，会出现死锁。锁力度小，发生锁冲突的概率小，并发度最高。</p>
+<p>提示：MyISAM存储引擎支持表锁，InnoDB存储引擎支持表锁和行锁，默认为行锁。</p>
 
       
     </div>
@@ -599,7 +611,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-5"><a class="nav-link" href="#1、为什么使用数据索引能提高效率？"><span class="nav-number">1.</span> <span class="nav-text">1、为什么使用数据索引能提高效率？</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#2、什么是事务？"><span class="nav-number">2.</span> <span class="nav-text">2、什么是事务？</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#３、ACID是什么？"><span class="nav-number">3.</span> <span class="nav-text">３、ACID是什么？</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#4、Mysql中的varchar和char有什么区别？"><span class="nav-number">4.</span> <span class="nav-text">4、Mysql中的varchar和char有什么区别？</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#5、范式。"><span class="nav-number">5.</span> <span class="nav-text">5、范式。</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-5"><a class="nav-link" href="#1、为什么使用数据索引能提高效率？"><span class="nav-number">1.</span> <span class="nav-text">1、为什么使用数据索引能提高效率？</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#2、什么是事务？"><span class="nav-number">2.</span> <span class="nav-text">2、什么是事务？</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#３、ACID是什么？"><span class="nav-number">3.</span> <span class="nav-text">３、ACID是什么？</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#4、Mysql中的varchar和char有什么区别？"><span class="nav-number">4.</span> <span class="nav-text">4、Mysql中的varchar和char有什么区别？</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#5、范式。"><span class="nav-number">5.</span> <span class="nav-text">5、范式。</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#6、事务隔离级别哪些？"><span class="nav-number">6.</span> <span class="nav-text">6、事务隔离级别哪些？</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#7、Mysql数据库的索引类型有哪些？"><span class="nav-number">7.</span> <span class="nav-text">7、Mysql数据库的索引类型有哪些？</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#8、Mysql中的锁类型有哪些？"><span class="nav-number">8.</span> <span class="nav-text">8、Mysql中的锁类型有哪些？</span></a></li></ol></div>
             
 
           </div>
@@ -647,7 +659,7 @@
 
 <div class="theme-info">
   <div class="powered-by"></div>
-  <span class="post-count">博客全站共28.9k字</span>
+  <span class="post-count">博客全站共29.4k字</span>
 </div>
 
         
