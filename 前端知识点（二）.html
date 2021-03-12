@@ -87,7 +87,7 @@
 <meta property="og:site_name" content="李先生">
 <meta property="og:description" content="摘要：前端知识点..">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2021-02-25T11:55:07.326Z">
+<meta property="og:updated_time" content="2021-03-12T08:02:05.498Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="前端知识点（二）">
 <meta name="twitter:description" content="摘要：前端知识点..">
@@ -359,7 +359,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  295 字
+                  643 字
                 </span>
               
 
@@ -375,7 +375,7 @@
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
                 <span title="阅读时长">
-                  1 分钟
+                  2 分钟
                 </span>
               
             </div>
@@ -401,9 +401,25 @@
 <h5 id="1、深拷贝与浅拷贝，ES6深拷贝方法"><a href="#1、深拷贝与浅拷贝，ES6深拷贝方法" class="headerlink" title="1、深拷贝与浅拷贝，ES6深拷贝方法"></a>1、深拷贝与浅拷贝，ES6深拷贝方法</h5><p>​    ①、浅拷贝就是在拷贝过程中，对象或者数组类型指向原来的内存地址。而深拷贝则是开辟新的内存地址，与元数据互不影响。</p>
 <p>​    ②、在ES6中，扩展运算符（…）与Object.assign（）都是浅拷贝；深拷贝的方法有 _.cloneDeep(value)</p>
 <h5 id="2、虚拟Dom的好处"><a href="#2、虚拟Dom的好处" class="headerlink" title="2、虚拟Dom的好处"></a>2、虚拟Dom的好处</h5><p>​    它会去比较虚拟节点的变化，然后计算出需要更新的视图，最后再渲染。从而提高了页面渲染的效率，减轻了节点操作后使性能也得到提高。</p>
-<h5 id="3、js的事件委托"><a href="#3、js的事件委托" class="headerlink" title="3、js的事件委托"></a>3、js的事件委托</h5><p>​    它根据冒泡原理实现，从最上面的节点逐渐往上传。而IE浏览器比较特殊，通常往下走，走捕获。</p>
+<h5 id="3、js的事件委托"><a href="#3、js的事件委托" class="headerlink" title="3、js的事件委托"></a>3、js的事件委托</h5><p>​    事件委托是指一个元素或者一组元素的响应事件（click、keydown….）委托到它的父级元素或者更外层的元素。故真正绑定事件的并不是目标元素，而是外层元素。</p>
+<p>​    事件委托是通过事件冒泡机制去触发目标元素的外层元素上绑定的事件，然后通过外层元素上去执行函数。通俗来讲，既根据冒泡原理实现，从最下面的节点逐渐往上传，事件的触发的执行顺序页式如此。</p>
 <h5 id="4、js对象的key类型"><a href="#4、js对象的key类型" class="headerlink" title="4、js对象的key类型"></a>4、js对象的key类型</h5><p>​    对象的键名应当都是字符串，而ES6中采用了Symbol值作为键名，所以键名字符串加不加引号都可以。</p>
 <h5 id="5、Vue组件首次渲染和更新"><a href="#5、Vue组件首次渲染和更新" class="headerlink" title="5、Vue组件首次渲染和更新"></a>5、Vue组件首次渲染和更新</h5><p>​    触发render函数，创建虚拟节点，通过patch方法计算渲染或更新的节点，最后再视图更新。</p>
+<h5>6、Vue事件修饰符</h5>
+
+<p>​    ①、.stop：阻止冒泡，即阻止事件向外层元素传递；</p>
+<p>​    ②、.once : 设置事件只能触发一次；</p>
+<p>​    ③、.self ： 将事件绑定到自身，只能由自身去触发；</p>
+<p>​    ④、.prevent ：阻止默认事件，即对Dom操作后会自动触发的一些动作，比如点击超链接会进行页面的跳转；</p>
+<p>​    ⑤、.capture ： 事件捕获，事件执行顺序即从外层元素到目标元素，与冒泡相反。</p>
+<h5>7、Vue模块化的理解</h5>
+
+<p>​    Vue一切皆组件，模块化就相当于一个功能由多个Vue组件实现。</p>
+<h5>8、路由守卫与拦截器的区别</h5>
+
+<p>​    ①、路由守卫即导航守卫，router.beforeEeach（），它只能判断用户是否有进入一个页面的访问权限，而不能判断token是否失效了；</p>
+<p>​    ②、axios拦截器，即axios.interceptors.request.use（），它会发起请求去判断token是否有效，如果有效就将token放在请求头里。</p>
+<p>​    </p>
 
       
     </div>
@@ -592,7 +608,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-5"><a class="nav-link" href="#1、深拷贝与浅拷贝，ES6深拷贝方法"><span class="nav-number">1.</span> <span class="nav-text">1、深拷贝与浅拷贝，ES6深拷贝方法</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#2、虚拟Dom的好处"><span class="nav-number">2.</span> <span class="nav-text">2、虚拟Dom的好处</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#3、js的事件委托"><span class="nav-number">3.</span> <span class="nav-text">3、js的事件委托</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#4、js对象的key类型"><span class="nav-number">4.</span> <span class="nav-text">4、js对象的key类型</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#5、Vue组件首次渲染和更新"><span class="nav-number">5.</span> <span class="nav-text">5、Vue组件首次渲染和更新</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-5"><a class="nav-link" href="#1、深拷贝与浅拷贝，ES6深拷贝方法"><span class="nav-number">1.</span> <span class="nav-text">1、深拷贝与浅拷贝，ES6深拷贝方法</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#2、虚拟Dom的好处"><span class="nav-number">2.</span> <span class="nav-text">2、虚拟Dom的好处</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#3、js的事件委托"><span class="nav-number">3.</span> <span class="nav-text">3、js的事件委托</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#4、js对象的key类型"><span class="nav-number">4.</span> <span class="nav-text">4、js对象的key类型</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#5、Vue组件首次渲染和更新"><span class="nav-number">5.</span> <span class="nav-text">5、Vue组件首次渲染和更新</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#undefined"><span class="nav-number">6.</span> <span class="nav-text">6、Vue事件修饰符</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#undefined"><span class="nav-number">7.</span> <span class="nav-text">7、Vue模块化的理解</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#undefined"><span class="nav-number">8.</span> <span class="nav-text">8、路由守卫与拦截器的区别</span></a></li></ol></div>
             
 
           </div>
@@ -640,7 +656,7 @@
 
 <div class="theme-info">
   <div class="powered-by"></div>
-  <span class="post-count">博客全站共29.8k字</span>
+  <span class="post-count">博客全站共30.1k字</span>
 </div>
 
         
