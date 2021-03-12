@@ -88,7 +88,10 @@
 <meta property="og:description" content="摘要：前端知识点…">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://yoursite.com/前端知识点（三）/1.jpg">
-<meta property="og:updated_time" content="2021-03-12T08:20:10.279Z">
+<meta property="og:image" content="http://yoursite.com/前端知识点（三）/2.png">
+<meta property="og:image" content="http://yoursite.com/前端知识点（三）/3.jpg">
+<meta property="og:image" content="http://yoursite.com/前端知识点（三）/4.jpg">
+<meta property="og:updated_time" content="2021-03-12T08:58:11.067Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="前端知识点（三）">
 <meta name="twitter:description" content="摘要：前端知识点…">
@@ -361,7 +364,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  47 字
+                  316 字
                 </span>
               
 
@@ -402,6 +405,19 @@
 <a id="more"></a>
 <h5 id="1、js获取当前月的第一天和最后一天"><a href="#1、js获取当前月的第一天和最后一天" class="headerlink" title="1、js获取当前月的第一天和最后一天"></a>1、js获取当前月的第一天和最后一天</h5><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> now = <span class="keyword">new</span> <span class="built_in">Date</span>();</span><br><span class="line"><span class="keyword">var</span> firstDay = <span class="keyword">new</span> <span class="built_in">Date</span>(now.getFullYear(),now.getMonth(),<span class="number">1</span>).toLocaleDateString();</span><br><span class="line"><span class="keyword">var</span> endDay = <span class="keyword">new</span> <span class="built_in">Date</span>(now.getFullYear(),now.getMonth()+<span class="number">1</span>,<span class="number">1</span>).toLocaleDateString();</span><br></pre></td></tr></table></figure>
 <img src="/前端知识点（三）/1.jpg">
+<h5>2、冒泡排序</h5>
+
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">bubbleSort</span>(<span class="params">arr</span>)</span>&#123;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">let</span> i = <span class="number">0</span>; i &lt; arr.length<span class="number">-1</span> ;i++)&#123;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">let</span> j = <span class="number">0</span>; j &lt; arr.length<span class="number">-1</span>-i;j++)&#123;</span><br><span class="line">            <span class="keyword">if</span>(arr[j] &gt; arr[j+<span class="number">1</span>])&#123;</span><br><span class="line">                [arr[j],arr[j+<span class="number">1</span>]] = [arr[j+<span class="number">1</span>],arr[j]];</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> arr;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(bubbleSort([<span class="number">2</span>,<span class="number">30</span>,<span class="number">1</span>,<span class="number">4</span>,<span class="number">6</span>,<span class="number">5</span>,<span class="number">20</span>]));</span><br></pre></td></tr></table></figure>
+<img src="/前端知识点（三）/2.png">
+<h5>3、数组去重</h5>
+
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">uniqArr</span>(<span class="params">arr</span>)</span>&#123;</span><br><span class="line">    <span class="keyword">let</span> temp = [];</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">let</span> i = <span class="number">0</span>;i&lt;arr.length;i++)&#123;</span><br><span class="line">        <span class="keyword">if</span>(temp.indexOf(arr[i]) == <span class="number">-1</span>)&#123;</span><br><span class="line">            temp.push(arr[i]);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> temp;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(uniqArr([<span class="number">1</span>,<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">2</span>,<span class="number">2</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>]));</span><br></pre></td></tr></table></figure>
+<img src="/前端知识点（三）/3.jpg">
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> arr = [<span class="number">1</span>,<span class="number">1</span>,<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">4</span>,<span class="number">5</span>,<span class="number">5</span>];</span><br><span class="line"><span class="keyword">let</span> uniq = [...new <span class="built_in">Set</span>(arr)];</span><br><span class="line"><span class="built_in">console</span>.log(uniq);</span><br></pre></td></tr></table></figure>
+<img src="/前端知识点（三）/4.jpg">
+<h5>4、Dom操作</h5>
+
+<p>​    ①、getElementById（），返回带有指定ID的元素；<br>​    ②、getElementsByTagName（），返回包含带有指定标签名称所有元素的节点列表；<br>​    ③、getElementsByClassName（），返回包含带有指定类名的所有元素的节点列表；<br>​    ④、appendChild（），把新的子节点添加到指定的节点；<br>​    ⑤、removeChild（），删除子节点；<br>​    ⑥、replaceChild（），替换子节点；<br>​    ⑦、insertBefore（），在指定的子节点前面插入新的子节点；<br>​    ⑧、createElement（），创建元素节点；<br>​    ⑨、getAttribute（），返回指定的属性值；<br>​    ⑩、setAttribute（），把指定属性设置或修改为指定值。</p>
 
       
     </div>
@@ -590,7 +606,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-5"><a class="nav-link" href="#1、js获取当前月的第一天和最后一天"><span class="nav-number">1.</span> <span class="nav-text">1、js获取当前月的第一天和最后一天</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-5"><a class="nav-link" href="#1、js获取当前月的第一天和最后一天"><span class="nav-number">1.</span> <span class="nav-text">1、js获取当前月的第一天和最后一天</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#undefined"><span class="nav-number">2.</span> <span class="nav-text">2、冒泡排序</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#undefined"><span class="nav-number">3.</span> <span class="nav-text">3、数组去重</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#undefined"><span class="nav-number">4.</span> <span class="nav-text">4、Dom操作</span></a></li></ol></div>
             
 
           </div>
@@ -638,7 +654,7 @@
 
 <div class="theme-info">
   <div class="powered-by"></div>
-  <span class="post-count">博客全站共30.2k字</span>
+  <span class="post-count">博客全站共30.4k字</span>
 </div>
 
         
